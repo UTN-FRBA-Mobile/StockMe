@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-allopen'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,8 +33,20 @@ android {
     }
 }
 
+allOpen {
+    annotation("org.androidannotations.api.KotlinOpen")
+}
+kapt {
+    correctErrorTypes = true
+}
+
+def AAVersion = "4.8.0"
+
 dependencies {
     implementation project(':network')
+
+    kapt "org.androidannotations:androidannotations:$AAVersion"
+    implementation "org.androidannotations:androidannotations-api:$AAVersion"
 
     implementation 'pub.devrel:easypermissions:3.0.0'
 
