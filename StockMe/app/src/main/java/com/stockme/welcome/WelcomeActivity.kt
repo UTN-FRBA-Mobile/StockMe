@@ -1,4 +1,4 @@
-package com.stockme.login
+package com.stockme.welcome
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,26 +7,26 @@ import com.stockme.BuildConfig
 import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
-import com.stockme.databinding.ActivityLoginBinding
+import com.stockme.databinding.ActivityWelcomeBinding
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
 import org.androidannotations.annotations.sharedpreferences.Pref
 
 
-@EActivity(R.layout.activity_login)
-class LoginActivity : AppCompatActivity() {
+@EActivity(R.layout.activity_welcome)
+class WelcomeActivity : AppCompatActivity() {
 
     @Pref
     protected lateinit var prefs: Prefs_
 
-    lateinit var binding: ActivityLoginBinding
+    lateinit var binding: ActivityWelcomeBinding
 
     @AfterViews
     fun start() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
 
         binding.version.text = BuildConfig.VERSION_NAME
 
@@ -60,5 +60,10 @@ class LoginActivity : AppCompatActivity() {
             MainActivity_.intent(this).start()
             finish()
 //        }, 2000)
+    }
+
+    @Click
+    fun register() {
+
     }
 }

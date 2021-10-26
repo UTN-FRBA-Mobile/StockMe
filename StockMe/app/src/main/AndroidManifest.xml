@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMe">
         <activity
-            android:name=".login.LoginActivity_"
+            android:name=".welcome.WelcomeActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:exported="true"
