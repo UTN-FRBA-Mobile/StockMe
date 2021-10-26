@@ -8,6 +8,8 @@ import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
 import com.stockme.databinding.ActivityWelcomeBinding
+import com.stockme.register.RegisterActivity
+import com.stockme.register.RegisterActivity_
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
@@ -64,6 +66,7 @@ class WelcomeActivity : AppCompatActivity() {
 
     @Click
     fun register() {
-
+        RegisterActivity_.intent(this).start()
+        finish()
     }
 }

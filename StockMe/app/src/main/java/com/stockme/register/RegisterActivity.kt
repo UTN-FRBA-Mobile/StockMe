@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import com.stockme.R
 import com.stockme.databinding.ActivityRegisterBinding
+import org.androidannotations.annotations.EActivity
 
+@EActivity(R.layout.activity_register)
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 

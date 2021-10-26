@@ -27,6 +27,12 @@
             android:name=".home.MainActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".register.RegisterActivity_"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
