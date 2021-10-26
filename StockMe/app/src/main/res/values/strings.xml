@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">StockMe</string>
-    <!-------INICIO - ACTIVITY LOGIN VALUES----->
+
+    <!--- INICIO - ACTIVITY LOGIN VALUES -->
     <string name="login_login">Login</string>
-    <!--------FIN - ACTIVITY LOGIN VALUES------->
+
+    <!--    Register Activity -->
+    <string name="register_title">Registrarse</string>
+    <string name="register_name">Nombre</string>
+    <string name="register_name_input">Ingresá tu nombre</string>
+    <string name="register_email">Email</string>
+    <string name="register_email_input">Ingresá tu email</string>
+    <string name="register_password">Contraseña</string>
+    <string name="register_password_input">Ingresá una contraseña</string>
+    <string name="register_repeat_password">Confirmar contraseña</string>
+    <string name="register_repeat_password_input">Repetí la contraseña</string>
+    <string name="register_terms_and_conditions">Acepto los términos y condiciones</string>
+    <string name="register_invalid_parameters">Por favor, revisá los datos ingresados</string>
+
 </resources>
