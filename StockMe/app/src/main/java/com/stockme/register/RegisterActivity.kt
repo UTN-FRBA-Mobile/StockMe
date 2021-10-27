@@ -5,11 +5,14 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import com.stockme.R
 import com.stockme.databinding.ActivityRegisterBinding
-import org.androidannotations.annotations.EActivity
+import com.stockme.home.MainActivity_
+import com.stockme.register.viewmodel.RegisterViewModel
+import com.stockme.utils.hideProgress
+import com.stockme.utils.showProgress
 
-@EActivity(R.layout.activity_register)
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+    private val viewModel = RegisterViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,21 +20,34 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupViews()
+        setupObserver()
     }
 
     private fun setupViews() {
         binding.registerButton.setOnClickListener {
+            showProgress()
             registerUser()
+        }
+    }
+
+    private fun setupObserver() {
+        viewModel.signUpLiveData.observe(this) {
+            hideProgress()
+            if (it) {
+                MainActivity_.intent(this).start()
+                finish()
+            } else {
+                showSnackBar(getString(R.string.register_error))
+            }
         }
     }
 
     private fun registerUser() {
         if (areFieldsValid()) {
-//            viewModel.registerUser(
-//                binding.registerNameEditText.text.toString(),
-//                binding.registerEmailEditText.text.toString(),
-//                binding.registerPasswordEditText.text.toString()
-//            )
+            viewModel.registerUser(
+                binding.registerEmailEditText.text.toString(),
+                binding.registerPasswordEditText.text.toString()
+            )
         } else {
             showSnackBar(getString(R.string.register_invalid_parameters))
         }
@@ -42,7 +58,7 @@ class RegisterActivity : AppCompatActivity() {
             && !binding.registerPasswordEditText.text.isNullOrBlank()
             && !binding.registerRepeatPasswordEditText.text.isNullOrBlank()
             && binding.registerPasswordEditText.text.toString() == binding.registerRepeatPasswordEditText.text.toString()
-            && binding.registerCheckbox.isActivated
+            && binding.registerCheckbox.isChecked
 
     private fun showSnackBar(text: String) = Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
 }

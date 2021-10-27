@@ -1,15 +1,17 @@
 package com.stockme.welcome
 
+import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.stockme.BuildConfig
 import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
 import com.stockme.databinding.ActivityWelcomeBinding
 import com.stockme.register.RegisterActivity
-import com.stockme.register.RegisterActivity_
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
@@ -32,8 +34,10 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.version.text = BuildConfig.VERSION_NAME
 
-        binding.root.postDelayed(Runnable {
-            if (prefs.loggedIn().get()) {
+        val user = Firebase.auth.currentUser
+
+        binding.root.postDelayed({
+            if (user != null) {
                 MainActivity_.intent(this).start()
                 finish()
             } else {
@@ -66,7 +70,8 @@ class WelcomeActivity : AppCompatActivity() {
 
     @Click
     fun register() {
-        RegisterActivity_.intent(this).start()
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
         finish()
     }
 }
