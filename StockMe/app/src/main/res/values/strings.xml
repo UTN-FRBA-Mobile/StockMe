@@ -16,5 +16,6 @@
     <string name="register_repeat_password_input">Repetí la contraseña</string>
     <string name="register_terms_and_conditions">Acepto los términos y condiciones</string>
     <string name="register_invalid_parameters">Por favor, revisá los datos ingresados</string>
+    <string name="register_error">Ocurrió un problema. Intente nuevamente</string>
 
 </resources>
