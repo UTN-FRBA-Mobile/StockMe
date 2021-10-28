@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".StockMeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMe">
         <activity
-            android:name=".login.LoginActivity_"
+            android:name=".welcome.WelcomeActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:exported="true"
@@ -27,6 +28,12 @@
             android:name=".home.MainActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".register.RegisterActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
