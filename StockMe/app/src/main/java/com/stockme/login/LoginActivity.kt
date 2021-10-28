@@ -4,8 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.getInputField
+import com.afollestad.materialdialogs.input.input
 import com.google.android.material.snackbar.Snackbar
 import com.stockme.R
 import com.stockme.databinding.ActivityLoginBinding
@@ -64,21 +65,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showResetPasswordDialog() {
-        val input = EditText(this)
-        input.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-
-        val alertDialogB = AlertDialog.Builder(this)
-
-        alertDialogB.apply {
-            setTitle(getString(R.string.login_forgot_password_dialog_title))
-            setView(input)
-            setPositiveButton(getString(R.string.login_forgot_password_dialog_positive_cta)) { _, _ ->
-                resetPassword(input.text.toString())
+        val type = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+        MaterialDialog(this).show {
+            title(R.string.login_forgot_password_dialog_title)
+            input(inputType = type)
+            positiveButton(R.string.login_forgot_password_dialog_positive_cta) {
+                resetPassword(it.getInputField().text.toString())
             }
-            setNegativeButton(getString(R.string.login_forgot_password_dialog_negative_cta)) { dialog, _ ->
-                dialog.cancel()
-            }
-        }.create().show()
+
+            negativeButton(R.string.login_forgot_password_dialog_negative_cta)
+        }
     }
 
     private fun loginUser() {
@@ -96,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun resetPassword(email: String) {
-        if (!email.trim().isNullOrBlank()) {
+        if (email.trim().isNotBlank()) {
             showProgress()
             viewModel.resetPassword(email)
         } else {
@@ -109,9 +105,9 @@ class LoginActivity : AppCompatActivity() {
     private fun showSnackBar(text: String) = Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
 
     private fun showDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.login_password_reset_successful))
-        builder.setPositiveButton(getString(R.string.login_forgot_password_dialog_positive_cta)) { dialog, _ -> dialog.cancel() }
-        builder.show()
+        MaterialDialog(this).show {
+            title(R.string.login_password_reset_successful)
+            positiveButton(R.string.login_forgot_password_dialog_positive_cta)
+        }
     }
 }
