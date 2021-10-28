@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 
 class RegisterViewModel: ViewModel() {
     private val _signUpLiveData = MutableLiveData<Boolean>()
-    private var auth: FirebaseAuth = Firebase.auth
+    private val auth: FirebaseAuth = Firebase.auth
 
     val signUpLiveData: MutableLiveData<Boolean> get() = _signUpLiveData
 

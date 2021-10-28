@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stockme">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".StockMeApplication"
@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMe">
         <activity
-            android:name=".welcome.WelcomeActivity_"
+            android:name=".splash.SplashActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:exported="true"
-            android:theme="@style/Theme.StockMe.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +25,23 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".welcome.WelcomeActivity_"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.StockMe.NoActionBar">
+        </activity>
+        <activity
             android:name=".home.MainActivity_"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".register.RegisterActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.LoginActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

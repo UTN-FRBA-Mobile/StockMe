@@ -4,6 +4,21 @@
     <!--- INICIO - ACTIVITY LOGIN VALUES -->
     <string name="login_login">Login</string>
 
+    <!--    Login Activity -->
+    <string name="login_sign_in">Iniciar Sesión</string>
+    <string name="login_email">Email</string>
+    <string name="login_email_input">Ingresá tu email</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_password_input">Ingresá tu contraseña</string>
+    <string name="login_no_account">No tengo cuenta</string>
+    <string name="login_forgot_password">Olvidé mi contraseña</string>
+    <string name="login_forgot_password_dialog_title">Ingresá tu email</string>
+    <string name="login_forgot_password_dialog_positive_cta">Aceptar</string>
+    <string name="login_forgot_password_dialog_negative_cta">Cancelar</string>
+    <string name="login_invalid_parameters">Por favor, revisá los datos ingresados</string>
+    <string name="login_error">Ocurrió un problema. Intente nuevamente</string>
+    <string name="login_password_reset_successful">Su contraseña ha sido reseteada exitosamente</string>
+
     <!--    Register Activity -->
     <string name="register_title">Registrarse</string>
     <string name="register_name">Nombre</string>
