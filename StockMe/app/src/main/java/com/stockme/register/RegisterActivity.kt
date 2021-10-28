@@ -53,10 +53,10 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun areFieldsValid(): Boolean = !binding.registerNameEditText.text.isNullOrBlank()
-            && !binding.registerEmailEditText.text.isNullOrBlank()
-            && !binding.registerPasswordEditText.text.isNullOrBlank()
-            && !binding.registerRepeatPasswordEditText.text.isNullOrBlank()
+    private fun areFieldsValid(): Boolean = !binding.registerNameEditText.text.trim().isNullOrBlank()
+            && !binding.registerEmailEditText.text.trim().isNullOrBlank()
+            && !binding.registerPasswordEditText.text.trim().isNullOrBlank()
+            && !binding.registerRepeatPasswordEditText.text.trim().isNullOrBlank()
             && binding.registerPasswordEditText.text.toString() == binding.registerRepeatPasswordEditText.text.toString()
             && binding.registerCheckbox.isChecked
 
