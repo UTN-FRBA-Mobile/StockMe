@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stockme">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMe">
         <activity
+            android:name=".buy.BuyActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.LoginActivity_"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:theme="@style/Theme.StockMe.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +29,7 @@
         <activity
             android:name=".home.MainActivity_"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.stockme.login
 
+import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -7,6 +8,7 @@ import com.stockme.BuildConfig
 import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
+import com.stockme.buy.BuyActivity
 import com.stockme.databinding.ActivityLoginBinding
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
@@ -50,15 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
     @Click
     fun login() {
-        binding.buttonsContainer.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-
-        // FIX(Mati): postDelated is not working for me now. I had a couple of
-        // nice animations set up but for some reason it stopped working. Will check it out.
-//        binding.root.postDelayed(Runnable {
-            prefs.loggedIn().put(true)
-            MainActivity_.intent(this).start()
-            finish()
-//        }, 2000)
+        val intent = Intent(this, BuyActivity::class.java)
+        startActivity(intent)
     }
 }
