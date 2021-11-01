@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+import android.util.Log
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -76,7 +77,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 product = it
                 fillViewWithProduct(it)
             } else {
-                showSnackBar(binding.root, getString(R.string.product_detail_error))
+                showSnackBar(binding.root, R.string.product_detail_error)
             }
         }
 
@@ -90,7 +91,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                showSnackBar(binding.root, getString(R.string.product_detail_error))
+                showSnackBar(binding.root, R.string.product_detail_error)
             }
         }
 
@@ -102,7 +103,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     positiveButton(R.string.common_positive_cta)
                 }
             } else {
-                showSnackBar(binding.root, getString(R.string.product_detail_error))
+                showSnackBar(binding.root, R.string.product_detail_error)
             }
         }
 
@@ -115,7 +116,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     positiveButton(R.string.common_positive_cta)
                 }
             } else {
-                showSnackBar(binding.root, getString(R.string.product_detail_error))
+                showSnackBar(binding.root, R.string.product_detail_error)
             }
         }
     }
@@ -147,7 +148,11 @@ class ProductDetailActivity : AppCompatActivity() {
                 override fun onSuccess() {
                     binding.productImageView.scaleType = ImageView.ScaleType.FIT_XY
                 }
-                override fun onError(e: java.lang.Exception?) {}
+                override fun onError(e: java.lang.Exception?) {
+                    binding.productImageView.setImageResource(R.drawable.ic_empty_image)
+                    binding.productImageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    Log.e("ProductDetailActivity", e?.localizedMessage.toString())
+                }
             })
 
         binding.icBarcode.visibility = VISIBLE
@@ -166,7 +171,7 @@ class ProductDetailActivity : AppCompatActivity() {
             showProgress()
             viewModel.createProduct(createProductFromData())
         } else {
-            showSnackBar(binding.root, getString(R.string.product_detail_invalid_parameters))
+            showSnackBar(binding.root, R.string.product_detail_invalid_parameters)
         }
     }
 
@@ -177,7 +182,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 viewModel.editProduct(productFromData(), it)
             }
         } else {
-            showSnackBar(binding.root, getString(R.string.product_detail_invalid_parameters))
+            showSnackBar(binding.root, R.string.product_detail_invalid_parameters)
         }
     }
 

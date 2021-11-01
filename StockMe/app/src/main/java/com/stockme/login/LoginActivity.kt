@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                 MainActivity_.intent(this).start()
                 finish()
             } else {
-                showSnackBar(binding.root, getString(R.string.login_error))
+                showSnackBar(binding.root, R.string.login_error)
             }
         }
 
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
             if (it) {
                 showDialog()
             } else {
-                showSnackBar(binding.root, getString(R.string.login_error))
+                showSnackBar(binding.root, R.string.login_error)
             }
         }
     }
@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
             showProgress()
             viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString())
         } else {
-            showSnackBar(binding.root, getString(R.string.login_invalid_parameters))
+            showSnackBar(binding.root, R.string.login_invalid_parameters)
         }
     }
 
@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
             showProgress()
             viewModel.resetPassword(email)
         } else {
-            showSnackBar(binding.root, getString(R.string.login_invalid_parameters))
+            showSnackBar(binding.root, R.string.login_invalid_parameters)
         }
     }
 

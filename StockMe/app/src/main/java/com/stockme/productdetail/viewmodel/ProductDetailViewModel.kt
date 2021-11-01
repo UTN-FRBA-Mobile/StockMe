@@ -89,9 +89,9 @@ class ProductDetailViewModel: ViewModel() {
     private fun mapDataToProduct(hashMap: HashMap<String, Any>) =
         Product(image = hashMap["image"] as String,
                 code = hashMap["code"] as String,
-                currentStock = (hashMap["current_stock"] as Long).toInt(),
-                maxStock = (hashMap["max_stock"] as Long).toInt(),
-                minStock = (hashMap["min_stock"] as Long).toInt(),
+                currentStock = (hashMap["currentStock"] as Long).toInt(),
+                maxStock = (hashMap["maxStock"] as Long).toInt(),
+                minStock = (hashMap["minStock"] as Long).toInt(),
                 price = hashMap["price"] as String,
                 isEnable = hashMap["enable"] as Boolean,
                 description = hashMap["description"] as String)
@@ -99,9 +99,9 @@ class ProductDetailViewModel: ViewModel() {
     private fun mapProductToData(product: Product) = hashMapOf(
         "image" to product.image,
         "code" to product.code,
-        "current_stock" to product.currentStock,
-        "max_stock" to product.maxStock,
-        "min_stock" to product.minStock,
+        "currentStock" to product.currentStock,
+        "maxStock" to product.maxStock,
+        "minStock" to product.minStock,
         "price" to product.price,
         "enable" to product.isEnable,
         "description" to product.description

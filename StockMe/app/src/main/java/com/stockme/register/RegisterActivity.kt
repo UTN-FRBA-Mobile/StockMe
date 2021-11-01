@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
                 MainActivity_.intent(this).start()
                 finish()
             } else {
-                showSnackBar(binding.root, getString(R.string.register_error))
+                showSnackBar(binding.root, R.string.register_error)
             }
         }
     }
@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
                 binding.registerPasswordEditText.text.toString()
             )
         } else {
-            showSnackBar(binding.root, getString(R.string.register_invalid_parameters))
+            showSnackBar(binding.root, R.string.register_invalid_parameters)
         }
     }
 
