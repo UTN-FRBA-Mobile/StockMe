@@ -7,7 +7,6 @@ import android.text.InputType
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
-import com.google.android.material.snackbar.Snackbar
 import com.stockme.R
 import com.stockme.databinding.ActivityLoginBinding
 import com.stockme.home.MainActivity_
@@ -15,6 +14,7 @@ import com.stockme.login.viewmodel.LoginViewModel
 import com.stockme.register.RegisterActivity
 import com.stockme.utils.hideProgress
 import com.stockme.utils.showProgress
+import com.stockme.utils.showSnackBar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                 MainActivity_.intent(this).start()
                 finish()
             } else {
-                showSnackBar(getString(R.string.login_error))
+                showSnackBar(binding.root, R.string.login_error)
             }
         }
 
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
             if (it) {
                 showDialog()
             } else {
-                showSnackBar(getString(R.string.login_error))
+                showSnackBar(binding.root, R.string.login_error)
             }
         }
     }
@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
             showProgress()
             viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString())
         } else {
-            showSnackBar(getString(R.string.login_invalid_parameters))
+            showSnackBar(binding.root, R.string.login_invalid_parameters)
         }
     }
 
@@ -96,13 +96,11 @@ class LoginActivity : AppCompatActivity() {
             showProgress()
             viewModel.resetPassword(email)
         } else {
-            showSnackBar(getString(R.string.login_invalid_parameters))
+            showSnackBar(binding.root, R.string.login_invalid_parameters)
         }
     }
 
     private fun areLoginFieldsValid(): Boolean = !binding.loginEmailEditText.text.isNullOrBlank() && !binding.loginPasswordEditText.text.isNullOrBlank()
-
-    private fun showSnackBar(text: String) = Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
 
     private fun showDialog() {
         MaterialDialog(this).show {
