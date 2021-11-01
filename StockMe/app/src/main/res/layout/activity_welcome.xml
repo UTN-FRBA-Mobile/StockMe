@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context=".welcome.LoginActivity_"
+    android:id="@+id/lroot"
+    >
+
+    <Space
+        android:id="@+id/topSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="245dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher_round"
+        />
+    <ImageView
+        android:id="@+id/isologo"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/isologo"
+        android:visibility="visible"
+        />
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        >
+
+        <ProgressBar
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/login_login"
+            />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrarse" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/versionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible"
+        >
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="85dp"
+        android:textSize="22sp"
+        tools:text="X.Y.Z"/>
+    </LinearLayout>
+
+</LinearLayout>
