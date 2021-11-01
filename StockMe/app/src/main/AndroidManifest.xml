@@ -14,14 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMe">
         <activity
-            android:name=".buy.BuyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".login.LoginActivity_"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.StockMe.NoActionBar">
             android:name=".splash.SplashActivity"
             android:exported="true"
             android:launchMode="singleTop"
@@ -57,6 +49,14 @@
 
         <activity
             android:name=".productdetail.ProductDetailActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:label="@string/product_detail_title"
+            />
+
+        <activity
+            android:name=".buy.BuyActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
