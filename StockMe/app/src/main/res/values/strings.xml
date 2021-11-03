@@ -51,5 +51,6 @@
     <string name="product_detail_invalid_parameters">Por favor, revisá los datos ingresados</string>
     <string name="product_detail_product_created_title">El producto ha sido creado satisfactoriamente</string>
     <string name="product_detail_product_modified_title">El producto ha sido modificado satisfactoriamente</string>
+    <string name="product_detail_product_upload_photo_title">La foto ha sido creada satisfactoriamente</string>
 
 </resources>

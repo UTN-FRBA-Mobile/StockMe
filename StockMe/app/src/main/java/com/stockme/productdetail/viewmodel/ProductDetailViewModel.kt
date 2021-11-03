@@ -44,8 +44,7 @@ class ProductDetailViewModel: ViewModel() {
     fun createProduct(product: Product) {
         firestoreDB
             .collection("products")
-            .document(UUID.randomUUID().toString())
-            .set(mapProductToData(product))
+            .add(mapProductToData(product))
             .addOnSuccessListener {
                 _createProductLiveData.value = true
             }
@@ -69,7 +68,9 @@ class ProductDetailViewModel: ViewModel() {
                 uploadProductPhotoLiveData.value = null
             }
             .addOnSuccessListener { taskSnapshot ->
-                uploadProductPhotoLiveData.value = taskSnapshot.uploadSessionUri.toString()
+                taskSnapshot.metadata!!.reference!!.downloadUrl.addOnCompleteListener{ task ->
+                    uploadProductPhotoLiveData.value = task.result.toString()
+                }
             }
     }
 
