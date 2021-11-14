@@ -1,14 +1,12 @@
 package com.stockme.productdetail
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View.VISIBLE
 import android.widget.ImageView
@@ -23,6 +21,8 @@ import com.stockme.productdetail.viewmodel.ProductDetailViewModel
 import com.stockme.utils.hideProgress
 import com.stockme.utils.showProgress
 import com.stockme.utils.showSnackBar
+import java.text.NumberFormat
+import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
@@ -30,6 +30,31 @@ class ProductDetailActivity : AppCompatActivity() {
     private var productId: String? = null
     private var photoURL: String? = null
     private var product: Product? = null
+    private var price: String? = null
+
+    private val addTextChangedListener = object: TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val stringText = s.toString()
+
+            if (stringText != price) {
+                binding.productPrice.removeTextChangedListener(this)
+
+                val locale: Locale = resources.configuration.locales[0]
+                val currency = Currency.getInstance(locale)
+                val cleanString = stringText.replace("[${currency.symbol},.]".toRegex(), "")
+                val parsed = cleanString.toDouble()
+                val formatted = NumberFormat.getCurrencyInstance(locale).format(parsed / 100)
+
+                price = formatted
+                binding.productPrice.setText(formatted)
+                binding.productPrice.setSelection(formatted.length)
+                binding.productPrice.addTextChangedListener(this)
+            }
+        }
+    }
 
     private val getResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -68,6 +93,8 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.productSaveButton.setOnClickListener {
             saveProduct()
         }
+
+        binding.productPrice.addTextChangedListener(addTextChangedListener)
     }
 
     private fun setupObserver() {
@@ -111,8 +138,9 @@ class ProductDetailActivity : AppCompatActivity() {
             hideProgress()
             if (it != null) {
                 photoURL = it
+                setPhoto(photoURL)
                 MaterialDialog(this).show {
-                    title(R.string.product_detail_product_modified_title)
+                    title(R.string.product_detail_product_upload_photo_title)
                     positiveButton(R.string.common_positive_cta)
                 }
             } else {
@@ -139,9 +167,22 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun fillViewWithProduct(product: Product) {
+        setPhoto(product.image)
+        binding.icBarcode.visibility = VISIBLE
+        binding.productBarcode.visibility = VISIBLE
+        binding.productBarcode.text = product.code
+        binding.productDescription.setText(product.description)
+        binding.productPrice.setText(product.price)
+        binding.productCheckbox.isChecked = product.isEnable
+        binding.productCurrentStockEditText.setText(product.currentStock.toString())
+        binding.productMinStockEditText.setText(product.minStock.toString())
+        binding.productMaxStockEditText.setText(product.maxStock.toString())
+    }
+
+    private fun setPhoto(imageURL: String?) {
         Picasso
             .get()
-            .load(product.image)
+            .load(imageURL)
             .placeholder(R.drawable.ic_empty_image)
             .error(R.drawable.ic_empty_image)
             .into(binding.productImageView, object: com.squareup.picasso.Callback {
@@ -154,16 +195,6 @@ class ProductDetailActivity : AppCompatActivity() {
                     Log.e("ProductDetailActivity", e?.localizedMessage.toString())
                 }
             })
-
-        binding.icBarcode.visibility = VISIBLE
-        binding.productBarcode.visibility = VISIBLE
-        binding.productBarcode.text = product.code
-        binding.productDescription.setText(product.description)
-        binding.productPrice.setText(product.price)
-        binding.productCheckbox.isChecked = product.isEnable
-        binding.productCurrentStockEditText.setText(product.currentStock.toString())
-        binding.productMinStockEditText.setText(product.minStock.toString())
-        binding.productMaxStockEditText.setText(product.maxStock.toString())
     }
 
     private fun createProduct() {
