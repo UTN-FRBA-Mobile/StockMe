@@ -10,6 +10,8 @@ import com.stockme.BuildConfig
 import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
+import com.stockme.buy.BuyActivity
+import com.stockme.databinding.ActivityBuyBinding
 import com.stockme.databinding.ActivityWelcomeBinding
 import com.stockme.login.LoginActivity
 import com.stockme.register.RegisterActivity
@@ -75,6 +77,13 @@ class WelcomeActivity : AppCompatActivity() {
     @Click
     fun register() {
         val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    @Click
+    fun shoppingCart() {
+        val intent = Intent(this, BuyActivity::class.java)
         startActivity(intent)
         finish()
     }

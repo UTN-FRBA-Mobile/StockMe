@@ -65,7 +65,7 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:text="@string/login_login"
             />
 
@@ -74,6 +74,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrarse" />
+
+        <Button
+            android:id="@+id/shoppingCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carrito de compras" />
 
     </LinearLayout>
 
@@ -85,14 +91,15 @@
         android:orientation="vertical"
         android:visibility="visible"
         >
-    <TextView
-        android:id="@+id/version"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="85dp"
-        android:textSize="22sp"
-        tools:text="X.Y.Z"/>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="85dp"
+            android:textSize="22sp"
+            tools:text="X.Y.Z" />
     </LinearLayout>
 
 </LinearLayout>
