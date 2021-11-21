@@ -12,7 +12,7 @@ import com.stockme.R
 class ProductAdapter (private val listener: ProductListFragment.OnFragmentInteractionListener?, private val products: List<Product>):
     RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
 
-    private var productListFiltered: ArrayList<Product> = ArrayList(products)
+    var productListFiltered: ArrayList<Product> = ArrayList(products)
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_product

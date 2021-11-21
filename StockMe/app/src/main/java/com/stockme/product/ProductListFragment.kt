@@ -32,6 +32,21 @@ class ProductListFragment : Fragment() {
         binding.fab.setOnClickListener {
 //            findNavController().navigate(R.id.action_ProductListFragment_to_SecondFragment)
         }
+        binding.productList.addOnItemTouchListener(
+            RecyclerItemClickListener(
+                context,
+                binding.productList,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View?, position: Int) {
+                        val product = productAdapter.productListFiltered[position]
+                        Snackbar.make(binding.root, "Click " + product.description, Snackbar.LENGTH_LONG).show()
+                    }
+
+                    override fun onLongItemClick(view: View?, position: Int) {
+                        // Snackbar.make(binding.root, "Long Click", Snackbar.LENGTH_LONG).show()
+                    }
+                })
+        )
     }
 
     override fun onAttach(context: Context) {
@@ -45,7 +60,7 @@ class ProductListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.list.visibility = View.GONE
+        binding.productList.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
 
         val products : List<Product> = listOf(
@@ -60,12 +75,12 @@ class ProductListFragment : Fragment() {
         )
 
         productAdapter = ProductAdapter(listener, products)
-        binding.list.apply {
+        binding.productList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = productAdapter
         }
 
-        binding.list.visibility = View.VISIBLE
+        binding.productList.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
     }
 
