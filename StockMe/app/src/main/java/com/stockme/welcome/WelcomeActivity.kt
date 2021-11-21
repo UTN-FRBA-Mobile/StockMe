@@ -12,7 +12,6 @@ import com.stockme.Prefs_
 import com.stockme.R
 import com.stockme.databinding.ActivityWelcomeBinding
 import com.stockme.login.LoginActivity
-import com.stockme.product.ProductListActivity
 import com.stockme.register.RegisterActivity
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
@@ -68,9 +67,7 @@ class WelcomeActivity : AppCompatActivity() {
 //            MainActivity_.intent(this).start()
 //            finish()
 //        }, 2000)
-
-//        val intent = Intent(this, LoginActivity::class.java)
-        val intent = Intent(this, ProductListActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

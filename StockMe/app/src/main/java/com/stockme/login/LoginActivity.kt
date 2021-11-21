@@ -11,6 +11,7 @@ import com.stockme.R
 import com.stockme.databinding.ActivityLoginBinding
 import com.stockme.home.MainActivity_
 import com.stockme.login.viewmodel.LoginViewModel
+import com.stockme.product.ProductListActivity
 import com.stockme.register.RegisterActivity
 import com.stockme.utils.hideProgress
 import com.stockme.utils.showProgress
@@ -80,7 +81,11 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser() {
         if (areLoginFieldsValid()) {
             showProgress()
-            viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString())
+            viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString()).addOnCompleteListener {
+                val intent = Intent(this, ProductListActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         } else {
             showSnackBar(binding.root, R.string.login_invalid_parameters)
         }

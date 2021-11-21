@@ -12,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.stockme.R
 import com.stockme.databinding.FragmentProductListBinding
+import com.stockme.model.Product
+import com.stockme.productdetail.ProductDetailActivity
 import kotlin.random.Random
 
 class ProductListFragment : Fragment() {
@@ -27,11 +29,20 @@ class ProductListFragment : Fragment() {
         return binding.root
     }
 
+    private fun navigateToDetail(productId: String? = null) {
+        val intent = Intent(context, ProductDetailActivity::class.java)
+        if (productId != null) intent.putExtra(ProductDetailActivity.PRODUCT_ID, productId)
+        startActivity(intent)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.fab.setOnClickListener {
+            navigateToDetail()
 //            findNavController().navigate(R.id.action_ProductListFragment_to_SecondFragment)
         }
+
         binding.productList.addOnItemTouchListener(
             RecyclerItemClickListener(
                 context,
@@ -39,7 +50,8 @@ class ProductListFragment : Fragment() {
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View?, position: Int) {
                         val product = productAdapter.productListFiltered[position]
-                        Snackbar.make(binding.root, "Click " + product.description, Snackbar.LENGTH_LONG).show()
+                        navigateToDetail(product.id)
+                        // Snackbar.make(binding.root, "Click " + product.description, Snackbar.LENGTH_LONG).show()
                     }
 
                     override fun onLongItemClick(view: View?, position: Int) {
@@ -64,14 +76,9 @@ class ProductListFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
 
         val products : List<Product> = listOf(
-            Product("1111111", "Producto 1", null, 11.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("2222222", "Producto 2", null, 12.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("3333333", "Producto 3", null, 13.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("4444444", "Producto 4", null, 14.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("5555555", "Producto 5", null, 15.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("6666666", "Producto 6", null, 16.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("7777777", "Producto 7", null, 17.0, true, Random.nextInt(1, 100), 1, 100),
-            Product("8888888", "Producto 8", null, 18.0, true, Random.nextInt(1, 100), 1, 100),
+            Product(id = "0RXinwZOhmzRf2tJzgQU", code = "1111111", description = "Producto 1", price = "11.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),
+            Product(id = "NX5yZjFTqjqBSkrbg6yI", code = "2222222", description = "Producto 2", price = "12.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),
+            Product(id = "a6c48369-035f-4a33-91f4-e65507e6c1d0", code = "3333333", description = "Producto 3", price = "13.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),
         )
 
         productAdapter = ProductAdapter(listener, products)
@@ -119,12 +126,15 @@ class ProductListFragment : Fragment() {
             super.onActivityResult(requestCode, resultCode, data)
             return
         }
+
         // Resultado del scanner
         if (result.contents == null) {
             Snackbar.make(binding.root, "Cancelado", Snackbar.LENGTH_LONG).show()
         }
         else {
-            Snackbar.make(binding.root, "Producto #" + result.contents, Snackbar.LENGTH_LONG).show()
+            val product = productAdapter.products().find { it.code == result.contents }
+            if (product != null) navigateToDetail(product.id)
+            else Snackbar.make(binding.root, "Producto #" + result.contents + " no encontrado", Snackbar.LENGTH_LONG).show()
         }
     }
 

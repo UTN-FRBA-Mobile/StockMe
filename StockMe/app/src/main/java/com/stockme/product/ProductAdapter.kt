@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.stockme.R
+import com.stockme.model.Product
 
 class ProductAdapter (private val listener: ProductListFragment.OnFragmentInteractionListener?, private val products: List<Product>):
     RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
@@ -28,9 +29,9 @@ class ProductAdapter (private val listener: ProductListFragment.OnFragmentIntera
             R.layout.item_product -> {
                 holder.itemView.findViewById<TextView>(R.id.descriptionText).text = productListFiltered[position].description
                 holder.itemView.findViewById<TextView>(R.id.codeText).text = ("#" + productListFiltered[position].code)
-                holder.itemView.findViewById<TextView>(R.id.stock).text    = (productListFiltered[position].quantity.toString()    + " UN")
-                holder.itemView.findViewById<TextView>(R.id.stockMin).text = (productListFiltered[position].minQuantity.toString() + " UN")
-                holder.itemView.findViewById<TextView>(R.id.stockMax).text = (productListFiltered[position].maxQuantity.toString() + " UN")
+                holder.itemView.findViewById<TextView>(R.id.stock).text    = (productListFiltered[position].currentStock.toString()    + " UN")
+                holder.itemView.findViewById<TextView>(R.id.stockMin).text = (productListFiltered[position].minStock.toString() + " UN")
+                holder.itemView.findViewById<TextView>(R.id.stockMax).text = (productListFiltered[position].maxStock.toString() + " UN")
 
                 if (productListFiltered[position].image != null) {
                     Picasso.get().load(Uri.parse(productListFiltered[position].image)).into(holder.itemView.findViewById<ImageView>(R.id.image))
@@ -39,6 +40,8 @@ class ProductAdapter (private val listener: ProductListFragment.OnFragmentIntera
             else -> {}
         }
     }
+
+    fun products() = products
 
     override fun getItemCount(): Int = productListFiltered.size
 
