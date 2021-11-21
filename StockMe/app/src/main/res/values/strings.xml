@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">StockMe</string>
 
+    <string name="common_positive_cta">Aceptar</string>
+    <string name="common_negative_cta">Cancelar</string>
+
     <!--- INICIO - ACTIVITY LOGIN VALUES -->
     <string name="login_login">Login</string>
 
@@ -32,5 +35,22 @@
     <string name="register_terms_and_conditions">Acepto los términos y condiciones</string>
     <string name="register_invalid_parameters">Por favor, revisá los datos ingresados</string>
     <string name="register_error">Ocurrió un problema. Intente nuevamente</string>
+    <!--    Product Detail-->
+
+    <string name="product_detail_title">Detalle del Producto</string>
+    <string name="product_detail_scan">Escanear</string>
+    <string name="product_detail_save">Guardar</string>
+    <string name="product_detail_description_hint">Descripción</string>
+    <string name="product_detail_price_hint">Precio</string>
+    <string name="product_detail_available">Habilitado</string>
+    <string name="product_detail_current_stock">Stock Actual</string>
+    <string name="product_detail_min_stock">Stock Mínimo</string>
+    <string name="product_detail_max_stock">Stock Máximo</string>
+    <string name="product_detail_stock_hint">-</string>
+    <string name="product_detail_error">Ocurrió un problema. Intente nuevamente</string>
+    <string name="product_detail_invalid_parameters">Por favor, revisá los datos ingresados</string>
+    <string name="product_detail_product_created_title">El producto ha sido creado satisfactoriamente</string>
+    <string name="product_detail_product_modified_title">El producto ha sido modificado satisfactoriamente</string>
+    <string name="product_detail_product_upload_photo_title">La foto ha sido creada satisfactoriamente</string>
 
 </resources>

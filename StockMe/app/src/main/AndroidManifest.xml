@@ -4,6 +4,7 @@
     package="com.stockme">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
         android:name=".StockMeApplication"
@@ -46,6 +47,13 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".productdetail.ProductDetailActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:label="@string/product_detail_title"
+            />
         <activity
             android:name=".product.ProductListActivity"
             android:exported="true"
