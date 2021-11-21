@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-allopen'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -49,6 +50,8 @@ def AAVersion = "4.8.0"
 
 dependencies {
     implementation project(':network')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.4'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
 
     kapt "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
