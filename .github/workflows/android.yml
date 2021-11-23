@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      working-directory: ./StockMe/
+      working-directory: ./StockMe
 
     steps:
     - uses: actions/checkout@v2
