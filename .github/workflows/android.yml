@@ -24,5 +24,13 @@ jobs:
       working-directory: ./StockMe
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew assembleRelease
       working-directory: ./StockMe
+
+    - name: upload artifact to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{secrets.FIREBASE_APP_ID}}
+        token: ${{secrets.FIREBASE_TOKEN}}
+        groups: developers
+        file: ./StockMe/app/build/outputs/apk/release/app-release-unsigned.apk
