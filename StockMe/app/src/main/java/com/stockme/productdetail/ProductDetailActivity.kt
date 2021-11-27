@@ -8,11 +8,14 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.integration.android.IntentIntegrator
 import com.squareup.picasso.Picasso
 import com.stockme.R
 import com.stockme.databinding.ActivityProductDetailBinding
@@ -150,7 +153,28 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun scanBarCode() {
-        //TODO: Abrir framework
+        IntentIntegrator(this).initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result == null) {
+            super.onActivityResult(requestCode, resultCode, data)
+            return
+        }
+        if (result.contents == null) {
+            Snackbar.make(binding.root, "Cancelado", Snackbar.LENGTH_LONG).show()
+            return
+        }
+        val products: List<Product> = listOf()
+        val existsCode = products.any { it.code == result.contents }
+        if (existsCode) {
+            Snackbar.make(binding.root, "Ya existe un producto con código #" + result.contents, Snackbar.LENGTH_LONG).show()
+            return
+        }
+        binding.productBarcode.text = result.contents
+        binding.productBarcode.visibility = VISIBLE
+        binding.icBarcode.visibility = VISIBLE
     }
 
     private fun openCamera() {
