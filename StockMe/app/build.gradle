@@ -53,6 +53,8 @@ dependencies {
     implementation project(':network')
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.4'
     implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     kapt "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
