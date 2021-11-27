@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.stockme.R
-import com.stockme.home.MainActivity_
+import com.stockme.home.HomeActivity
 import com.stockme.welcome.WelcomeActivity_
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -21,7 +21,8 @@ class SplashActivity : AppCompatActivity(R.layout.activity_splash), CoroutineSco
         launch {
             delay(2000L)
             if (auth.currentUser != null) {
-                val intent = Intent(this@SplashActivity, MainActivity_::class.java)
+
+                val intent = Intent(this@SplashActivity, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

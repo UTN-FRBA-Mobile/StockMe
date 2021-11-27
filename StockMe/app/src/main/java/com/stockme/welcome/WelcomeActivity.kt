@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.stockme.BuildConfig
-import com.stockme.home.MainActivity_
 import com.stockme.Prefs_
 import com.stockme.R
 import com.stockme.databinding.ActivityWelcomeBinding
+import com.stockme.home.HomeActivity
 import com.stockme.login.LoginActivity
 import com.stockme.register.RegisterActivity
 import org.androidannotations.annotations.AfterViews
@@ -39,7 +39,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.root.postDelayed({
             if (user != null) {
-                MainActivity_.intent(this).start()
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {
                 binding.topSpace.visibility = View.GONE
@@ -64,7 +64,7 @@ class WelcomeActivity : AppCompatActivity() {
         // nice animations set up but for some reason it stopped working. Will check it out.
 //        binding.root.postDelayed(Runnable {
 //            prefs.loggedIn().put(true)
-//            MainActivity_.intent(this).start()
+//            startActivity(Intent(this, HomeActivity::class.java))
 //            finish()
 //        }, 2000)
         val intent = Intent(this, LoginActivity::class.java)

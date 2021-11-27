@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 import com.stockme.R
 import com.stockme.model.Product
 
-class ProductAdapter (private val listener: ProductListFragment.OnFragmentInteractionListener?, private val products: List<Product>):
+class ProductAdapter(private val products: List<Product>):
     RecyclerView.Adapter<ProductAdapter.ViewHolder>(), Filterable {
 
     var productListFiltered: ArrayList<Product> = ArrayList(products)

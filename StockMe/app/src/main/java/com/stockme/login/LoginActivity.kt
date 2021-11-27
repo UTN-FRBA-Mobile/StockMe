@@ -9,9 +9,8 @@ import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.stockme.R
 import com.stockme.databinding.ActivityLoginBinding
-import com.stockme.home.MainActivity_
+import com.stockme.home.HomeActivity
 import com.stockme.login.viewmodel.LoginViewModel
-import com.stockme.product.ProductListActivity
 import com.stockme.register.RegisterActivity
 import com.stockme.utils.hideProgress
 import com.stockme.utils.showProgress
@@ -48,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.signInLiveData.observe(this) {
             hideProgress()
             if (it) {
-                MainActivity_.intent(this).start()
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {
                 showSnackBar(binding.root, R.string.login_error)
@@ -82,8 +81,7 @@ class LoginActivity : AppCompatActivity() {
         if (areLoginFieldsValid()) {
             showProgress()
             viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString()).addOnCompleteListener {
-                val intent = Intent(this, ProductListActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             }
         } else {
