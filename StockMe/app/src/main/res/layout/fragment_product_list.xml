@@ -26,6 +26,12 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
+        <include
+            android:id="@+id/searchNotFound"
+            layout="@layout/item_product_not_found"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"

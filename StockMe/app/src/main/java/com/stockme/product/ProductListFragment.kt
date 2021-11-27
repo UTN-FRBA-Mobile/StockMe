@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -37,12 +36,7 @@ class ProductListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.fab.setOnClickListener {
-            navigateToDetail()
-//            findNavController().navigate(R.id.action_ProductListFragment_to_SecondFragment)
-        }
-
+        binding.fab.setOnClickListener { navigateToDetail() }
         binding.productList.addOnItemTouchListener(
             RecyclerItemClickListener(
                 context,
@@ -51,12 +45,9 @@ class ProductListFragment : Fragment() {
                     override fun onItemClick(view: View?, position: Int) {
                         val product = productAdapter.productListFiltered[position]
                         navigateToDetail(product.id)
-                        // Snackbar.make(binding.root, "Click " + product.description, Snackbar.LENGTH_LONG).show()
                     }
 
-                    override fun onLongItemClick(view: View?, position: Int) {
-                        // Snackbar.make(binding.root, "Long Click", Snackbar.LENGTH_LONG).show()
-                    }
+                    override fun onLongItemClick(view: View?, position: Int) { }
                 })
         )
     }
@@ -74,6 +65,7 @@ class ProductListFragment : Fragment() {
         super.onStart()
         binding.productList.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
+        binding.searchNotFound.root.visibility = View.GONE
 
         val products : List<Product> = listOf(
             Product(id = "0RXinwZOhmzRf2tJzgQU", code = "1111111", description = "Producto 1", price = "11.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),
@@ -97,7 +89,10 @@ class ProductListFragment : Fragment() {
         val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                productAdapter.filter.filter(newText)
+                productAdapter.filter.filter(newText) {
+                    binding.searchNotFound.root.visibility =
+                        if (productAdapter.itemCount > 0) View.GONE else View.VISIBLE
+                }
                 return false
             }
 
