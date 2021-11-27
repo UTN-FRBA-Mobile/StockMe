@@ -58,6 +58,7 @@
             android:exported="true"
             android:label="@string/product_detail_title"
             android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
