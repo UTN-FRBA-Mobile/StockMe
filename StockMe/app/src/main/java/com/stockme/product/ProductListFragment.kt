@@ -19,7 +19,6 @@ class ProductListFragment : Fragment() {
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
 
-    private var listener: OnFragmentInteractionListener? = null
     private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,15 +51,6 @@ class ProductListFragment : Fragment() {
         )
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         binding.productList.visibility = View.GONE
@@ -73,7 +63,7 @@ class ProductListFragment : Fragment() {
             Product(id = "a6c48369-035f-4a33-91f4-e65507e6c1d0", code = "3333333", description = "Producto 3", price = "13.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),
         )
 
-        productAdapter = ProductAdapter(listener, products)
+        productAdapter = ProductAdapter(products)
         binding.productList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = productAdapter
@@ -133,18 +123,9 @@ class ProductListFragment : Fragment() {
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    interface OnFragmentInteractionListener {
-        fun showFragment(fragment: Fragment)
     }
 
     companion object {

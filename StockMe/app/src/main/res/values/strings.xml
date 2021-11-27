@@ -53,5 +53,15 @@
     <string name="product_detail_product_modified_title">El producto ha sido modificado satisfactoriamente</string>
     <string name="product_detail_product_upload_photo_title">La foto ha sido creada satisfactoriamente</string>
     <string name="product_search_not_found">No hay productos que coincidan con tu búsqueda</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Productos</string>
+    <string name="menu_sales">Ventas</string>
+    <string name="menu_stock">Órdenes de compra</string>
 
 </resources>
