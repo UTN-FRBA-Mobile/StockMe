@@ -41,7 +41,7 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.StockMe.NoActionBar"></activity>
+            android:theme="@style/Theme.StockMe.NoActionBar" />
         <activity
             android:name=".register.RegisterActivity"
             android:exported="true"
