@@ -31,12 +31,11 @@ jobs:
       working-directory: ./StockMe
 
     - name: Build with Gradle
-      run: ./gradlew assembleRelease
+      run: ./StockMe/gradlew assembleRelease
       env:
         KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      working-directory: ./StockMe
 
     - name: Upload artifact to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
