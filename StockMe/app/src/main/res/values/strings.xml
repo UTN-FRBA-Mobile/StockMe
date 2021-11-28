@@ -64,4 +64,6 @@
     <string name="menu_sales">Ventas</string>
     <string name="menu_stock">Órdenes de compra</string>
 
+    <string name="rationale_camera">Se requiere el uso de la cámara para tomar fotografías.</string>
+
 </resources>
