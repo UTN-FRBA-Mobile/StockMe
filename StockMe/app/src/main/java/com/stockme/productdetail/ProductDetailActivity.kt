@@ -83,11 +83,17 @@ class ProductDetailActivity : AppCompatActivity() {
         setupViews()
         setupObserver()
 
+        if (intent.extras == null) {
+            setTitle(R.string.product_detail_title_new_product)
+        }
 
         intent.extras?.getString(PRODUCT_ID)?.let {
             productId = it
             showProgress()
             viewModel.fetchProduct(it)
+            if (productId == null) {
+                setTitle(R.string.product_detail_title_new_product)
+            }
         }
     }
 
