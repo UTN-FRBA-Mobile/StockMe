@@ -30,6 +30,8 @@ android {
             def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
             def allFilesFromDir = new File(tmpFilePath).listFiles()
 
+            println(allFilesFromDir)
+
             if (allFilesFromDir != null) {
                 def keystoreFile = allFilesFromDir.first()
                 keystoreFile.renameTo("keystore/keystore.jks")
