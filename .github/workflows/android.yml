@@ -31,7 +31,7 @@ jobs:
       working-directory: ./StockMe
 
     - name: Build with Gradle
-      run: ./StockMe/gradlew app:bundleRelease
+      run: ./StockMe/gradlew build
       env:
         KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -43,4 +43,4 @@ jobs:
         appId: ${{secrets.FIREBASE_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: developers
-        file: ./StockMe/app/build/outputs/apk/release/app-release-unsigned.apk
+        file: ./StockMe/app/build/outputs/apk/release/app-release-signed.apk
