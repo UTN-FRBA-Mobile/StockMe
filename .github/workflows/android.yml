@@ -16,8 +16,7 @@ jobs:
       env:
         ENCODED_STRING: ${{ secrets.KEYSTORE }}
       run: |
-          TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
-          mkdir "${TMP_KEYSTORE_FILE_PATH}"
+          mkdir /home/runner/work/StockMe/StockMe/StockMe/app/keystore/
           echo $ENCODED_STRING | base64 -di > /home/runner/work/StockMe/StockMe/StockMe/app/keystore/keystore.jks
 
     - name: Set up JDK 11
