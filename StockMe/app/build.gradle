@@ -93,6 +93,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'io.grpc:grpc-okhttp:1.32.2'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
