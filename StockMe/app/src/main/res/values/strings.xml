@@ -19,6 +19,7 @@
     <string name="login_forgot_password_dialog_positive_cta">Aceptar</string>
     <string name="login_forgot_password_dialog_negative_cta">Cancelar</string>
     <string name="login_invalid_parameters">Por favor, revisá los datos ingresados</string>
+    <string name="login_invalid_email">Por favor, revisá el formato de email ingresado</string>
     <string name="login_invalid_user_password">Usuario o contraseña incorrectos</string>
     <string name="login_error">Ocurrió un problema. Intente nuevamente</string>
     <string name="login_password_reset_successful">Su contraseña ha sido reseteada exitosamente</string>
