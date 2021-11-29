@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
@@ -76,6 +78,8 @@ class ProductListFragment : Fragment() {
                 binding.productList.apply {
                     adapter = productAdapter
                     layoutManager = LinearLayoutManager(context)
+                    addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+                    itemAnimator = DefaultItemAnimator()
                 }
             } else {
                 Snackbar.make(binding.root, R.string.product_detail_error, Snackbar.LENGTH_LONG).show()
