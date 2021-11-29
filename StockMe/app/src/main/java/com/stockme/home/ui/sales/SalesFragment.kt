@@ -77,10 +77,7 @@ class SalesFragment : Fragment() {
 
     private fun promptAddToCart(product: Product) {
         if (product.currentStock == 0) {
-            MaterialDialog(requireContext()).show {
-                title(R.string.dialog_cart_no_stock_text)
-                positiveButton(R.string.dialog_cart_no_stock_yes)
-            }
+            Snackbar.make(binding.root, R.string.dialog_cart_no_stock_text, Snackbar.LENGTH_SHORT).show()
             return
         }
         val type = InputType.TYPE_CLASS_NUMBER
@@ -93,7 +90,6 @@ class SalesFragment : Fragment() {
                 val prodInCart = product.copy(currentStock = quantity)
                 cart.add(prodInCart)
             }
-
             negativeButton(R.string.dialog_cart_no)
         }
     }
@@ -124,10 +120,8 @@ class SalesFragment : Fragment() {
             }
             R.id.action_cart -> {
                 if (cart.isEmpty()) {
-                    MaterialDialog(requireContext()).show {
-                        title(R.string.dialog_cart_empty_text)
-                        positiveButton(R.string.dialog_cart_empty_yes)
-                    }
+                    Snackbar.make(binding.root, R.string.dialog_cart_empty_text, Snackbar.LENGTH_SHORT).show()
+                    return true
                 }
                 true
             }
