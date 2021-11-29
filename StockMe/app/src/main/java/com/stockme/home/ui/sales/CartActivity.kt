@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.stockme.R
 import com.stockme.databinding.ActivityCartBinding
 import com.stockme.model.Product
@@ -21,6 +25,8 @@ class CartActivity : AppCompatActivity() {
 
     private lateinit var cart : List<Product>
     private lateinit var cartAdapter: SalesProductAdapter
+
+    private val firestoreDB = Firebase.firestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +58,17 @@ class CartActivity : AppCompatActivity() {
                 title(R.string.dialog_cart_confirm_text)
                 message(R.string.dialog_cart_confirm_desc)
                 positiveButton(R.string.dialog_cart_yes) {
-
+                    val batchUpdate = firestoreDB.batch()
+                    for (product in cart) {
+                        val decrementQuantity: Long = (-1 * product.currentStock).toLong()
+                        val prodByIdRef = firestoreDB.collection("products")
+                                .document(product.id!!)
+                        batchUpdate.update(prodByIdRef, "currentStock", FieldValue.increment(decrementQuantity))
+                    }
+                    batchUpdate.commit().addOnCompleteListener {
+                        Snackbar.make(binding.root, R.string.dialog_cart_confirm_sale_text, Snackbar.LENGTH_LONG).show()
+                        finish()
+                    }
                 }
                 negativeButton(R.string.dialog_cart_no)
             }
