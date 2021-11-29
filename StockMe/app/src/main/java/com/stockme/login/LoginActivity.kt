@@ -15,6 +15,9 @@ import com.stockme.register.RegisterActivity
 import com.stockme.utils.hideProgress
 import com.stockme.utils.showProgress
 import com.stockme.utils.showSnackBar
+import android.text.TextUtils
+import android.util.Patterns
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -70,9 +73,13 @@ class LoginActivity : AppCompatActivity() {
             title(R.string.login_forgot_password_dialog_title)
             input(inputType = type)
             positiveButton(R.string.login_forgot_password_dialog_positive_cta) {
+                if (isValidEmail(it.getInputField().text.toString()))
+                {
                 resetPassword(it.getInputField().text.toString())
+                } else{
+                    showSnackBar(binding.root, R.string.login_invalid_email)
+                }
             }
-
             negativeButton(R.string.login_forgot_password_dialog_negative_cta)
         }
     }
@@ -85,7 +92,12 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         } else {
-            showSnackBar(binding.root, R.string.login_invalid_parameters)
+            if (!isValidEmail(binding.loginEmailEditText.text)) {
+                showSnackBar(binding.root, R.string.login_invalid_email)
+
+            }  else {
+                showSnackBar(binding.root, R.string.login_invalid_parameters)
+            }
         }
     }
 
@@ -94,16 +106,29 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun isValidEmail(target: CharSequence?): Boolean {
+        return if (TextUtils.isEmpty(target)) {
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(target).matches()
+        }
+    }
+
     private fun resetPassword(email: String) {
         if (email.trim().isNotBlank()) {
             showProgress()
             viewModel.resetPassword(email)
         } else {
-            showSnackBar(binding.root, R.string.login_invalid_parameters)
+            if (!isValidEmail(binding.loginEmailEditText.text)) {
+                showSnackBar(binding.root, R.string.login_invalid_email)
+
+            }  else {
+                showSnackBar(binding.root, R.string.login_invalid_parameters)
+            }
         }
     }
 
-    private fun areLoginFieldsValid(): Boolean = !binding.loginEmailEditText.text.isNullOrBlank() && !binding.loginPasswordEditText.text.isNullOrBlank()
+    private fun areLoginFieldsValid(): Boolean = isValidEmail(binding.loginEmailEditText.text) && !binding.loginPasswordEditText.text.isNullOrBlank()
 
     private fun showDialog() {
         MaterialDialog(this).show {
