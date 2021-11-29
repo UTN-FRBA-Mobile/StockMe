@@ -23,4 +23,8 @@
         android:label="@string/menu_stock"
         tools:layout="@layout/fragment_order_purchase_list" />
 
+    <dialog
+        android:id="@+id/nav_logout"
+        android:name="com.stockme.home.LogoutDialogFragment"
+        android:label="Cerrar sesión" />
 </navigation>

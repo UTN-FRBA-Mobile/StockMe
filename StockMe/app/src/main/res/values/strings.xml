@@ -64,7 +64,12 @@
     <string name="menu_home">Productos</string>
     <string name="menu_sales">Ventas</string>
     <string name="menu_stock">Órdenes de compra</string>
+    <string name="menu_logout">Cerrar sesión</string>
 
     <string name="rationale_camera">Se requiere el uso de la cámara para tomar fotografías.</string>
+
+    <string name="dialog_logout_text">¿Confirma que desea cerrar sesión?</string>
+    <string name="dialog_logout_yes">SI</string>
+    <string name="dialog_logout_no">Cancelar</string>
 
 </resources>
