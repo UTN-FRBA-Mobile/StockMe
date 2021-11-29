@@ -6,7 +6,6 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
-apply plugin: 'kotlin-android'
 
 android {
     compileSdk 31
