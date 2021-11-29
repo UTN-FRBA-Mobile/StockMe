@@ -12,7 +12,7 @@ import com.stockme.buy.models.Product
 
 class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    private val name: TextView = view.findViewById(R.id.name)
+    private val name: TextView = view.findViewById(R.id.descriptionText)
 
     fun bind(product: Product) {
         name.text = product.name
