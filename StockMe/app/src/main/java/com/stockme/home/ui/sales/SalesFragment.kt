@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
@@ -29,6 +30,7 @@ class SalesFragment : Fragment() {
     private lateinit var productAdapter: SalesProductAdapter
 
     private val products = ArrayList<Product>()
+    private val cart = ArrayList<Product>()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -86,7 +88,10 @@ class SalesFragment : Fragment() {
             title(R.string.dialog_cart_add_text)
             input(inputType = type)
             positiveButton(R.string.dialog_cart_yes) {
-//                resetPassword(it.getInputField().text.toString())
+                val quantity = it.getInputField().text.toString().toInt()
+
+                val prodInCart = product.copy(currentStock = quantity)
+                cart.add(prodInCart)
             }
 
             negativeButton(R.string.dialog_cart_no)
@@ -115,6 +120,15 @@ class SalesFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_scan -> {
                 initScanner()
+                true
+            }
+            R.id.action_cart -> {
+                if (cart.isEmpty()) {
+                    MaterialDialog(requireContext()).show {
+                        title(R.string.dialog_cart_empty_text)
+                        positiveButton(R.string.dialog_cart_empty_yes)
+                    }
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

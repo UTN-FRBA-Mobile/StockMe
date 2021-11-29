@@ -78,4 +78,7 @@
 
     <string name="dialog_cart_no_stock_text">No hay unidades de este producto</string>
     <string name="dialog_cart_no_stock_yes">OK</string>
+
+    <string name="dialog_cart_empty_text">El carrito está vacío</string>
+    <string name="dialog_cart_empty_yes">OK</string>
 </resources>
