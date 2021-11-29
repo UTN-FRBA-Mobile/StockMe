@@ -31,7 +31,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupViews() {
         binding.registerButton.setOnClickListener {
-            showProgress()
             registerUser()
         }
     }
@@ -61,6 +60,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun registerUser() {
         if (areFieldsValid()) {
+            showProgress()
             viewModel.registerUser(
                 binding.registerEmailEditText.text.toString(),
                 binding.registerPasswordEditText.text.toString()
