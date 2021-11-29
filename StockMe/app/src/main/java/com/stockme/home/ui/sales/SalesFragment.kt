@@ -1,21 +1,22 @@
 package com.stockme.home.ui.sales
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.text.InputType
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.integration.android.IntentIntegrator
 import com.stockme.R
 import com.stockme.databinding.FragmentSalesBinding
 import com.stockme.model.Product
-import com.stockme.product.ProductAdapter
 import com.stockme.product.RecyclerItemClickListener
 
 class SalesFragment : Fragment() {
@@ -30,16 +31,17 @@ class SalesFragment : Fragment() {
     private val products = ArrayList<Product>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View {
         viewModel =
-            ViewModelProvider(this).get(SalesViewModel::class.java)
+                ViewModelProvider(this).get(SalesViewModel::class.java)
 
         _binding = FragmentSalesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        setHasOptionsMenu(true)
+
+        return binding.root
     }
 
     override fun onStart() {
@@ -59,8 +61,8 @@ class SalesFragment : Fragment() {
                         binding.productList,
                         object : RecyclerItemClickListener.OnItemClickListener {
                             override fun onItemClick(view: View?, position: Int) {
-//                                val product = productAdapter.productListFiltered[position]
-//                                navigateToDetail(product.id)
+                                val product = productAdapter.productListFiltered[position]
+                                promptAddToCart(product)
                             }
 
                             override fun onLongItemClick(view: View?, position: Int) { }
@@ -68,6 +70,77 @@ class SalesFragment : Fragment() {
         )
 
         setupObserver()
+    }
+
+
+    private fun promptAddToCart(product: Product) {
+        if (product.currentStock == 0) {
+            MaterialDialog(requireContext()).show {
+                title(R.string.dialog_cart_no_stock_text)
+                positiveButton(R.string.dialog_cart_no_stock_yes)
+            }
+            return
+        }
+        val type = InputType.TYPE_CLASS_NUMBER
+        MaterialDialog(requireContext()).show {
+            title(R.string.dialog_cart_add_text)
+            input(inputType = type)
+            positiveButton(R.string.dialog_cart_yes) {
+//                resetPassword(it.getInputField().text.toString())
+            }
+
+            negativeButton(R.string.dialog_cart_no)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_sales_search, menu)
+        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                productAdapter.filter.filter(newText) {
+                    binding.searchNotFound.root.visibility =
+                            if (productAdapter.itemCount > 0) View.GONE else View.VISIBLE
+                }
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_scan -> {
+                initScanner()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun initScanner() {
+        IntentIntegrator.forSupportFragment(this).initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result == null) {
+            super.onActivityResult(requestCode, resultCode, data)
+            return
+        }
+
+        // Resultado del scanner
+        if (result.contents == null) {
+            Snackbar.make(binding.root, "Cancelado", Snackbar.LENGTH_LONG).show()
+        }
+        else {
+            val product = productAdapter.products().find { it.code == result.contents }
+            if (product != null) promptAddToCart(product)
+            else Snackbar.make(binding.root, "Producto #" + result.contents + " no encontrado", Snackbar.LENGTH_LONG).show()
+        }
     }
 
 

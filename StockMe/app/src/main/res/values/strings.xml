@@ -72,4 +72,10 @@
     <string name="dialog_logout_yes">SI</string>
     <string name="dialog_logout_no">Cancelar</string>
 
+    <string name="dialog_cart_add_text">¿Cuántas unidades?</string>
+    <string name="dialog_cart_yes">CONFIRMAR</string>
+    <string name="dialog_cart_no">CANCELAR</string>
+
+    <string name="dialog_cart_no_stock_text">No hay unidades de este producto</string>
+    <string name="dialog_cart_no_stock_yes">OK</string>
 </resources>
