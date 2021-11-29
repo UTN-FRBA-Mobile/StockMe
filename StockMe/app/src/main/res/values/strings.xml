@@ -62,7 +62,7 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="menu_home">Productos</string>
-    <string name="menu_sales">Ventas</string>
+    <string name="menu_sales">Nueva venta</string>
     <string name="menu_stock">Órdenes de compra</string>
     <string name="menu_logout">Cerrar sesión</string>
 
