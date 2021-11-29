@@ -8,12 +8,13 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.stockme.R
+import com.stockme.model.OrderPurchase
 import com.stockme.model.ProductOrderPurchase
 
-class OrderPurchaseDetailAdapter (private val orderPurchaseDetail: List<ProductOrderPurchase>):
+class OrderPurchaseDetailAdapter (private val orderPurchaseDetail: OrderPurchase):
     RecyclerView.Adapter<OrderPurchaseDetailAdapter.ViewHolder>(), Filterable {
 
-    private var productOrderPurchaseListFiltered: ArrayList<ProductOrderPurchase> = ArrayList(orderPurchaseDetail)
+    private var orderPurchaseProductListFiltered: ArrayList<ProductOrderPurchase> = orderPurchaseDetail.products
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_order_purchase_detail
@@ -27,18 +28,18 @@ class OrderPurchaseDetailAdapter (private val orderPurchaseDetail: List<ProductO
     override fun onBindViewHolder(holder: OrderPurchaseDetailAdapter.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.item_order_purchase_detail -> {
-                holder.itemView.findViewById<TextView>(R.id.descriptionText).text = productOrderPurchaseListFiltered[position].product.description
-                holder.itemView.findViewById<TextView>(R.id.codeText).text = ("#" + productOrderPurchaseListFiltered[position].product.code)
-                holder.itemView.findViewById<TextView>(R.id.stockOrdered).text    = (productOrderPurchaseListFiltered[position].stockOrdered.toString()    + " UN")
-                if (productOrderPurchaseListFiltered[position].product.image != null) {
-                    Picasso.get().load(Uri.parse(productOrderPurchaseListFiltered[position].product.image)).into(holder.itemView.findViewById<ImageView>(R.id.image))
+                holder.itemView.findViewById<TextView>(R.id.descriptionText).text = orderPurchaseProductListFiltered[position].product.description
+                holder.itemView.findViewById<TextView>(R.id.codeText).text = ("#" + orderPurchaseProductListFiltered[position].product.code)
+                holder.itemView.findViewById<TextView>(R.id.stockOrdered).text    = (orderPurchaseProductListFiltered[position].stockOrdered.toString()    + " UN")
+                if (orderPurchaseProductListFiltered[position].product.image != null) {
+                    Picasso.get().load(Uri.parse(orderPurchaseProductListFiltered[position].product.image)).into(holder.itemView.findViewById<ImageView>(R.id.image))
                 }
             }
             else -> {}
         }
 
     }
-    override fun getItemCount(): Int = productOrderPurchaseListFiltered.size
+    override fun getItemCount(): Int = orderPurchaseProductListFiltered.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -46,18 +47,19 @@ class OrderPurchaseDetailAdapter (private val orderPurchaseDetail: List<ProductO
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint?.toString() ?: ""
-                var OrderPurchaseList = orderPurchaseDetail
-                if (charSearch.isNotEmpty()) OrderPurchaseList = OrderPurchaseList.filter { productOrderPurchase ->
-                    productOrderPurchase.product.code.lowercase().contains(charSearch.lowercase()) || productOrderPurchase.product.description.lowercase().contains(charSearch.lowercase())
-                }
-                productOrderPurchaseListFiltered.clear()
-                productOrderPurchaseListFiltered.addAll(OrderPurchaseList)
-                return FilterResults().apply { values = productOrderPurchaseListFiltered }
+                var orderPurchaseProducts = orderPurchaseDetail.products
+                if (charSearch.isNotEmpty()) orderPurchaseProducts =
+                    orderPurchaseProducts.filter { orderPurchaseProduct ->
+                        orderPurchaseProduct.product.code.lowercase().contains(charSearch.lowercase()) || orderPurchaseProduct.product.description.lowercase().contains(charSearch.lowercase())
+                    } as ArrayList<ProductOrderPurchase>
+                orderPurchaseProductListFiltered.clear()
+                orderPurchaseProductListFiltered.addAll(orderPurchaseProducts)
+                return FilterResults().apply { values = orderPurchaseProductListFiltered }
             }
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                productOrderPurchaseListFiltered = results?.values as ArrayList<ProductOrderPurchase>
+                orderPurchaseProductListFiltered = results?.values as ArrayList<ProductOrderPurchase>
                 notifyDataSetChanged()
             }
         }

@@ -39,7 +39,7 @@ class OrderPurchaseAdapter (private val orderPurchases: List<OrderPurchase>):
                     orderPurchaseListFiltered[position].supplier
                 holder.itemView.setOnClickListener {
                     view -> view.findNavController().navigate(R.id.action_nav_stocks_to_nav_stocks_detail,
-                    bundleOf("orderPurchase" to orderPurchases )
+                    bundleOf("orderPurchase" to orderPurchases[position] )
                 )
                 }
             }

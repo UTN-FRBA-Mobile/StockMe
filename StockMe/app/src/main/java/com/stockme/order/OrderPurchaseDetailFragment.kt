@@ -22,7 +22,8 @@ import kotlin.random.Random
 class OrderPurchaseDetailFragment : Fragment() {
     private var _binding: FragmentOrderPurchaseDetailBinding? = null
     private val binding get() = _binding!!
-
+    var args = arguments
+    private lateinit var orderPurchase: OrderPurchase
     private lateinit var orderPurchaseDetailAdapter: OrderPurchaseDetailAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,36 +34,22 @@ class OrderPurchaseDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var mPrueba = args?.getSerializable("orderPurchase")
+        orderPurchase = (args?.getSerializable("orderPurchase") as OrderPurchase ?)!!
 
         binding.fab.setOnClickListener {
             // navigateToDetail()
         }
-       /* binding.orderPurchaseList.addOnItemTouchListener(
-            RecyclerItemClickListener(
-                context,
-                binding.orderPurchaseList,
-                object : RecyclerItemClickListener.OnItemClickListener {
-                    override fun onItemClick(view: View?, position: Int) {
-                        val orderPurchase = orderPurchaseAdapter.orderPurchaseAdapterListFiltered[position]
-                        navigateToDetail(orderPurchase.id)
-                        // Snackbar.make(binding.root, "Click " + product.description, Snackbar.LENGTH_LONG).show()
-                    }
 
-                    override fun onLongItemClick(view: View?, position: Int) {
-                        // Snackbar.make(binding.root, "Long Click", Snackbar.LENGTH_LONG).show()
-                    }
-                })
-        )*/
     }
 
     override fun onStart() {
         super.onStart()
 
-        binding.code.visibility = View.GONE
         binding.productList.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
 
-        val products : List<ProductOrderPurchase> = listOf(
+        /*val products : List<ProductOrderPurchase> = listOf(
             ProductOrderPurchase(Product(id = "0RXinwZOhmzRf2tJzgQU", code = "1111111", description = "Producto 1", price = "11.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),123),
             ProductOrderPurchase(Product(id = "NX5yZjFTqjqBSkrbg6yI", code = "2222222", description = "Producto 2", price = "12.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),32),
             ProductOrderPurchase(Product(id = "a6c48369-035f-4a33-91f4-e65507e6c1d0", code = "3333333", description = "Producto 3", price = "13.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),42),
@@ -71,9 +58,9 @@ class OrderPurchaseDetailFragment : Fragment() {
         val orderPurchases : List<OrderPurchase> = listOf(
             OrderPurchase("1111111", "2021-01-01", "", "proveedor1", ArrayList<ProductOrderPurchase>(products)),
             OrderPurchase("2222222", "2021-01-01", "", "proveedor1",ArrayList<ProductOrderPurchase>(products)),
-        )
+        )*/
 
-        orderPurchaseDetailAdapter = OrderPurchaseDetailAdapter(products)
+        orderPurchaseDetailAdapter = OrderPurchaseDetailAdapter(orderPurchase)
         binding.productList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = orderPurchaseDetailAdapter

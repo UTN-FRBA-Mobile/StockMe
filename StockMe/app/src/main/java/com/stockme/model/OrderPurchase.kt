@@ -4,5 +4,5 @@ data class OrderPurchase(val code: String,
                          val createdDate: String,
                          val admissionDate: String,
                          val supplier: String,
-                         val products: List<ProductOrderPurchase>,
+                         val products: ArrayList<ProductOrderPurchase>,
 )
