@@ -86,6 +86,10 @@ class LoginActivity : AppCompatActivity() {
             showProgress()
             viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString()).addOnCompleteListener {
 
+                if (!it.isSuccessful) {
+                    showSnackBar(binding.root, R.string.login_invalid_user_password)
+                    return@addOnCompleteListener
+                }
                 FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
                         Log.w(TAG, "Fetching FCM registration token failed", task.exception)
