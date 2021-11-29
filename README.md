@@ -4,6 +4,7 @@
 </p>
 
 # StockMe
+<img width="400" height="auto" src="screenshots/Screen_Shot_2021-11-29_16-56-47.png">
 
 ## Descripción corta
 Administración de stock simplificado.
