@@ -17,7 +17,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_product" />
+            tools:listitem="@layout/item_sales_product" />
 
         <ProgressBar
             android:id="@+id/progressBar"

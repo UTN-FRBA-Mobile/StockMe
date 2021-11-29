@@ -123,6 +123,10 @@ class SalesFragment : Fragment() {
                     Snackbar.make(binding.root, R.string.dialog_cart_empty_text, Snackbar.LENGTH_SHORT).show()
                     return true
                 }
+                val intent = Intent(requireContext(), CartActivity::class.java).apply {
+                    putExtra("cart", cart)
+                }
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

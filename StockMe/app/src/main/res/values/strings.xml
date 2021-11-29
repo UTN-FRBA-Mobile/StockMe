@@ -81,4 +81,7 @@
 
     <string name="dialog_cart_empty_text">El carrito está vacío</string>
     <string name="dialog_cart_empty_yes">OK</string>
+    <string name="activity_cart">Último paso</string>
+    <string name="dialog_cart_confirm_text">¿Confirma la venta?</string>
+    <string name="dialog_cart_confirm_desc">Los productos serán descontados del stock disponible.</string>
 </resources>
