@@ -6,7 +6,6 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
-apply plugin: 'kotlin-android'
 
 android {
     compileSdk 31
@@ -64,8 +63,9 @@ dependencies {
     implementation project(':network')
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.4'
     implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
 
     kapt "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
@@ -73,7 +73,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -88,12 +88,12 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation platform('com.google.firebase:firebase-bom:28.4.2')
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
 
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
-    implementation 'io.grpc:grpc-okhttp:1.32.2'
+    implementation 'io.grpc:grpc-okhttp:1.41.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
