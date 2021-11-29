@@ -82,7 +82,7 @@ class SalesFragment : Fragment() {
 
 
     private fun promptAddToCart(product: Product) {
-        if (product.currentStock == 0) {
+        if (product.currentStock <= 0) {
             Snackbar.make(binding.root, R.string.dialog_cart_no_stock_text, Snackbar.LENGTH_SHORT).show()
             return
         }
