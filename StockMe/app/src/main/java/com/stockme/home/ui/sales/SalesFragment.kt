@@ -92,14 +92,21 @@ class SalesFragment : Fragment() {
             input(inputType = type)
             positiveButton(R.string.dialog_cart_yes) {
                 val quantity = it.getInputField().text.toString().toInt()
-
-                if (quantity > product.currentStock) {
-                    Snackbar.make(binding.root, R.string.dialog_sales_max_stock, Snackbar.LENGTH_LONG).show()
-                    return@positiveButton
-                }
                 val prodInCart = product.copy(currentStock = quantity)
 
                 val existingInCart = cart.find { it.id == prodInCart.id }
+
+                var cartStock = 0;
+
+                if (existingInCart != null) {
+                    cartStock = existingInCart.currentStock
+                }
+
+                if ((quantity + cartStock) > product.currentStock) {
+                    Snackbar.make(binding.root, R.string.dialog_sales_max_stock, Snackbar.LENGTH_LONG).show()
+                    return@positiveButton
+                }
+
 
                 if (existingInCart == null) {
                     cart.add(prodInCart)
