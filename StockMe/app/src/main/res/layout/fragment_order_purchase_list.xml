@@ -9,10 +9,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".order.OrderPurchaseListFragment">
+        tools:context=".OrderPurchaseListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/orderPurchaseList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layoutManager="LinearLayoutManager"

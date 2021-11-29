@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.type.Date
 import com.squareup.picasso.Picasso
@@ -14,7 +17,7 @@ import com.stockme.R
 class OrderPurchaseAdapter (private val orderPurchases: List<OrderPurchase>):
     RecyclerView.Adapter<OrderPurchaseAdapter.ViewHolder>(), Filterable {
 
-    private var orderPurchaseListFiltered: ArrayList<OrderPurchase> = ArrayList(orderPurchases)
+    var orderPurchaseListFiltered: ArrayList<OrderPurchase> = ArrayList(orderPurchases)
 
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_order_purchase
@@ -28,13 +31,22 @@ class OrderPurchaseAdapter (private val orderPurchases: List<OrderPurchase>):
     override fun onBindViewHolder(holder: OrderPurchaseAdapter.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.item_order_purchase -> {
-                holder.itemView.findViewById<TextView>(R.id.code).text = orderPurchaseListFiltered[position].code
-                holder.itemView.findViewById<TextView>(R.id.createdDate).text = (orderPurchaseListFiltered[position].createdDate)
-                holder.itemView.findViewById<TextView>(R.id.supplier).text = orderPurchaseListFiltered[position].supplier
+                holder.itemView.findViewById<TextView>(R.id.code).text =
+                    orderPurchaseListFiltered[position].code
+                holder.itemView.findViewById<TextView>(R.id.createdDate).text =
+                    orderPurchaseListFiltered[position].createdDate
+                holder.itemView.findViewById<TextView>(R.id.supplier).text =
+                    orderPurchaseListFiltered[position].supplier
+                holder.itemView.setOnClickListener {
+                    view -> view.findNavController().navigate(R.id.action_nav_stocks_to_nav_stocks_detail,
+                    bundleOf("orderPurchase" to orderPurchases )
+                )
+                }
             }
             else -> {}
         }
     }
+
     override fun getItemCount(): Int = orderPurchaseListFiltered.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

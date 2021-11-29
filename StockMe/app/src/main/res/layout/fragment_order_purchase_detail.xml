@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/titulo"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/subtitleProduct"
         android:layout_width="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -73,7 +73,7 @@
         android:textStyle="bold"
         tools:text="Producto" />
         <TextView
-            android:id="@+id/titleStockOrdered"
+            android:id="@+id/subtitleStockOrdered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -83,14 +83,14 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ProductOrderListFragment">
+        tools:context=".OrderPurchaseDetailFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_product_order_purchase" />
+            tools:listitem="@layout/item_order_purchase_detail" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -109,5 +109,6 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/colorAccent"
             app:srcCompat="@android:drawable/ic_input_add" />
-    </RelativeLayout>
+    </FrameLayout>
+
 </LinearLayout>

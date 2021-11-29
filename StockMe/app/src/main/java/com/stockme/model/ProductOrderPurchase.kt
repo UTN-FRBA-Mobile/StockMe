@@ -1,6 +1,6 @@
 package com.stockme.model
 
-data class OrderProduct  (
+data class ProductOrderPurchase  (
     val product: Product,
-    val stock: Int,
+    val stockOrdered: Int,
 )

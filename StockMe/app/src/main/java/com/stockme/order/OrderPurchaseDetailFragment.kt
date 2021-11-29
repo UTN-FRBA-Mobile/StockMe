@@ -1,30 +1,29 @@
 package com.stockme.order
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.stockme.R
 import com.stockme.databinding.FragmentOrderPurchaseDetailBinding
+import com.stockme.model.OrderPurchase
 import com.stockme.model.ProductOrderPurchase
 import com.stockme.model.Product
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import kotlin.random.Random
 
 //import com.stockme.orderPurchaseDetail.OrderPurchaseDetail
 
-class ProductOrderPurchaseListFragment : Fragment() {
+class OrderPurchaseDetailFragment : Fragment() {
     private var _binding: FragmentOrderPurchaseDetailBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var productOrderPurchaseAdapter: ProductOrderPurchaseAdapter
+    private lateinit var orderPurchaseDetailAdapter: OrderPurchaseDetailAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentOrderPurchaseDetailBinding.inflate(inflater, container, false)
@@ -38,7 +37,7 @@ class ProductOrderPurchaseListFragment : Fragment() {
         binding.fab.setOnClickListener {
             // navigateToDetail()
         }
-    /*    binding.orderPurchaseList.addOnItemTouchListener(
+       /* binding.orderPurchaseList.addOnItemTouchListener(
             RecyclerItemClickListener(
                 context,
                 binding.orderPurchaseList,
@@ -58,19 +57,26 @@ class ProductOrderPurchaseListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        binding.code.visibility = View.GONE
         binding.productList.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
 
-        val productsOrderPurchase : List<ProductOrderPurchase> = listOf(
+        val products : List<ProductOrderPurchase> = listOf(
             ProductOrderPurchase(Product(id = "0RXinwZOhmzRf2tJzgQU", code = "1111111", description = "Producto 1", price = "11.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),123),
             ProductOrderPurchase(Product(id = "NX5yZjFTqjqBSkrbg6yI", code = "2222222", description = "Producto 2", price = "12.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),32),
             ProductOrderPurchase(Product(id = "a6c48369-035f-4a33-91f4-e65507e6c1d0", code = "3333333", description = "Producto 3", price = "13.0", currentStock = Random.nextInt(1, 100), minStock = 1, maxStock = 100),42),
         )
 
-        productOrderPurchaseAdapter = ProductOrderPurchaseAdapter(productsOrderPurchase)
+        val orderPurchases : List<OrderPurchase> = listOf(
+            OrderPurchase("1111111", "2021-01-01", "", "proveedor1", ArrayList<ProductOrderPurchase>(products)),
+            OrderPurchase("2222222", "2021-01-01", "", "proveedor1",ArrayList<ProductOrderPurchase>(products)),
+        )
+
+        orderPurchaseDetailAdapter = OrderPurchaseDetailAdapter(products)
         binding.productList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = productOrderPurchaseAdapter
+            adapter = orderPurchaseDetailAdapter
         }
 
         binding.productList.visibility = View.VISIBLE
@@ -80,16 +86,6 @@ class ProductOrderPurchaseListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.menu_search, menu)
-        val searchView: SearchView = menu.findItem(R.id.action_search).actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String): Boolean {
-                productOrderPurchaseAdapter.filter.filter(newText)
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String?): Boolean = false
-        })
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -131,6 +127,6 @@ class ProductOrderPurchaseListFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ProductOrderPurchaseListFragment()
+        fun newInstance() = OrderPurchaseDetailFragment()
     }
 }

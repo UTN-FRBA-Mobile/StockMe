@@ -10,8 +10,8 @@ import com.squareup.picasso.Picasso
 import com.stockme.R
 import com.stockme.model.ProductOrderPurchase
 
-class ProductOrderPurchaseAdapter (private val orderPurchaseDetail: List<ProductOrderPurchase>):
-    RecyclerView.Adapter<ProductOrderPurchaseAdapter.ViewHolder>(), Filterable {
+class OrderPurchaseDetailAdapter (private val orderPurchaseDetail: List<ProductOrderPurchase>):
+    RecyclerView.Adapter<OrderPurchaseDetailAdapter.ViewHolder>(), Filterable {
 
     private var productOrderPurchaseListFiltered: ArrayList<ProductOrderPurchase> = ArrayList(orderPurchaseDetail)
 
@@ -19,12 +19,12 @@ class ProductOrderPurchaseAdapter (private val orderPurchaseDetail: List<Product
         return R.layout.item_order_purchase_detail
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductOrderPurchaseAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderPurchaseDetailAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProductOrderPurchaseAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderPurchaseDetailAdapter.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.item_order_purchase_detail -> {
                 holder.itemView.findViewById<TextView>(R.id.descriptionText).text = productOrderPurchaseListFiltered[position].product.description
@@ -36,6 +36,7 @@ class ProductOrderPurchaseAdapter (private val orderPurchaseDetail: List<Product
             }
             else -> {}
         }
+
     }
     override fun getItemCount(): Int = productOrderPurchaseListFiltered.size
 
