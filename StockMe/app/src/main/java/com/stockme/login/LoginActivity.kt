@@ -4,12 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.getInputField
 import com.afollestad.materialdialogs.input.input
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.stockme.R
 import com.stockme.databinding.ActivityLoginBinding
-import com.stockme.home.MainActivity_
+import com.stockme.home.HomeActivity
 import com.stockme.login.viewmodel.LoginViewModel
 import com.stockme.register.RegisterActivity
 import com.stockme.utils.hideProgress
@@ -17,6 +20,7 @@ import com.stockme.utils.showProgress
 import com.stockme.utils.showSnackBar
 
 class LoginActivity : AppCompatActivity() {
+    private val TAG = "LoginActivity"
     private lateinit var binding: ActivityLoginBinding
     private val viewModel = LoginViewModel()
 
@@ -47,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.signInLiveData.observe(this) {
             hideProgress()
             if (it) {
-                MainActivity_.intent(this).start()
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {
                 showSnackBar(binding.root, R.string.login_error)
@@ -80,7 +84,22 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser() {
         if (areLoginFieldsValid()) {
             showProgress()
-            viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString())
+            viewModel.loginUser(binding.loginEmailEditText.text.toString(), binding.loginPasswordEditText.text.toString()).addOnCompleteListener {
+
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                        return@OnCompleteListener
+                    }
+                    val token = task.result
+
+                    Log.d(TAG, token!!)
+
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                })
+
+            }
         } else {
             showSnackBar(binding.root, R.string.login_invalid_parameters)
         }

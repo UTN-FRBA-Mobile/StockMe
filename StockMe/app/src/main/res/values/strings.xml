@@ -38,6 +38,7 @@
     <!--    Product Detail-->
 
     <string name="product_detail_title">Detalle del Producto</string>
+    <string name="product_detail_title_new_product">Nuevo Producto</string>
     <string name="product_detail_scan">Escanear</string>
     <string name="product_detail_save">Guardar</string>
     <string name="product_detail_description_hint">Descripción</string>
@@ -52,5 +53,23 @@
     <string name="product_detail_product_created_title">El producto ha sido creado satisfactoriamente</string>
     <string name="product_detail_product_modified_title">El producto ha sido modificado satisfactoriamente</string>
     <string name="product_detail_product_upload_photo_title">La foto ha sido creada satisfactoriamente</string>
+    <string name="product_search_not_found">No hay productos que coincidan con tu búsqueda</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Productos</string>
+    <string name="menu_sales">Ventas</string>
+    <string name="menu_stock">Órdenes de compra</string>
+    <string name="menu_logout">Cerrar sesión</string>
+
+    <string name="rationale_camera">Se requiere el uso de la cámara para tomar fotografías.</string>
+
+    <string name="dialog_logout_text">¿Confirma que desea cerrar sesión?</string>
+    <string name="dialog_logout_yes">SI</string>
+    <string name="dialog_logout_no">Cancelar</string>
 
 </resources>

@@ -24,7 +24,7 @@
         android:layout_height="245dp"
         android:scaleType="fitCenter"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/ic_launcher"
         />
     <ImageView
         android:id="@+id/isologo"
