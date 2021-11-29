@@ -1,4 +1,4 @@
-package com.stockme.home.ui.sales
+package com.stockme.home.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -14,6 +14,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.stockme.R
 import com.stockme.databinding.ActivityCartBinding
+import com.stockme.home.ui.sales.SalesFragment
+import com.stockme.home.ui.sales.SalesProductAdapter
 import com.stockme.model.Product
 
 

@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.stockme.R
 import com.stockme.databinding.FragmentSalesBinding
+import com.stockme.home.ui.CartActivity
 import com.stockme.model.Product
 import com.stockme.product.RecyclerItemClickListener
 

@@ -1,6 +1,5 @@
 package com.stockme.home.ui.sales
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.QueryDocumentSnapshot
