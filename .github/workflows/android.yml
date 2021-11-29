@@ -12,6 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Decode Keystore
+      env:
+        ENCODED_STRING: ${{ secrets.KEYSTORE }}
+      run: |
+          mkdir /home/runner/work/StockMe/StockMe/StockMe/app/keystore/
+          echo $ENCODED_STRING | base64 -di > /home/runner/work/StockMe/StockMe/StockMe/app/keystore/keystore.jks
+
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -26,11 +33,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleRelease
       working-directory: ./StockMe
+      env:
+        KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-    - name: upload artifact to Firebase App Distribution
+    - name: Upload artifact to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
         appId: ${{secrets.FIREBASE_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: developers
-        file: ./StockMe/app/build/outputs/apk/release/app-release-unsigned.apk
+        file: ./StockMe/app/build/outputs/apk/release/app-release.apk

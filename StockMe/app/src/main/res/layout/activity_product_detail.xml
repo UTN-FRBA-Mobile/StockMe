@@ -59,6 +59,9 @@
             android:layout_height="40dp"
             android:hint="@string/product_detail_description_hint"
             android:layout_marginTop="50dp"
+            android:inputType="textCapSentences"
+            android:lines="1"
+            android:nextFocusForward="@id/product_price"
             app:layout_constraintTop_toBottomOf="@+id/ic_barcode"
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline" />
@@ -68,7 +71,9 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:hint="@string/product_detail_price_hint"
+            android:inputType="numberDecimal"
             android:layout_marginTop="10dp"
+            android:nextFocusForward="@id/product_current_stock_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/product_description"
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline" />
@@ -142,6 +147,7 @@
             app:layout_constraintTop_toBottomOf="@+id/product_max_stock"
             app:layout_constraintLeft_toLeftOf="@+id/product_max_stock"
             app:layout_constraintRight_toLeftOf="@id/right_guideline"
+            android:imeOptions="actionDone"
             android:textColor="@color/black"
             android:inputType="number"
             android:textAlignment="center"
@@ -154,6 +160,8 @@
             app:layout_constraintTop_toBottomOf="@+id/product_min_stock"
             app:layout_constraintLeft_toLeftOf="@id/product_min_stock"
             app:layout_constraintRight_toRightOf="@id/product_min_stock"
+            android:nextFocusForward="@id/product_max_stock_edit_text"
+            android:imeOptions="actionNext"
             android:textColor="@color/black"
             android:inputType="number"
             android:textAlignment="center"
@@ -169,6 +177,8 @@
             android:textColor="@color/black"
             android:inputType="number"
             android:textAlignment="center"
+            android:nextFocusForward="@id/product_min_stock_edit_text"
+            android:imeOptions="actionNext"
             android:hint="@string/product_detail_stock_hint" />
 
         <Button

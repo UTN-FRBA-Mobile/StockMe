@@ -22,4 +22,9 @@
         android:name="com.stockme.home.ui.stock.StockFragment"
         android:label="@string/menu_stock"
         tools:layout="@layout/fragment_stock" />
+
+    <dialog
+        android:id="@+id/nav_logout"
+        android:name="com.stockme.home.LogoutDialogFragment"
+        android:label="Cerrar sesión" />
 </navigation>

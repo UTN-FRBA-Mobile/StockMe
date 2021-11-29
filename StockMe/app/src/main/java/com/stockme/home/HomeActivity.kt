@@ -1,14 +1,17 @@
 package com.stockme.home
 
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.stockme.R
 import com.stockme.databinding.ActivityHomeBinding
 
@@ -32,11 +35,20 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_sales, R.id.nav_stocks
+                R.id.nav_home, R.id.nav_sales, R.id.nav_stocks, R.id.nav_logout
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val headerView = navView.getHeaderView(0);
+        val userName = headerView.findViewById<TextView>(R.id.user_name)
+        val userEmail = headerView.findViewById<TextView>(R.id.user_email)
+
+        val currentUser = Firebase.auth.currentUser!!
+
+        userName.text = currentUser.displayName
+        userEmail.text = currentUser.email
     }
 
     override fun onSupportNavigateUp(): Boolean {

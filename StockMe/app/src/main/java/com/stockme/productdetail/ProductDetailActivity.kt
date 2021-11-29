@@ -1,5 +1,6 @@
 package com.stockme.productdetail
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,6 +14,8 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.snackbar.Snackbar
+import com.google.zxing.integration.android.IntentIntegrator
 import com.squareup.picasso.Picasso
 import com.stockme.R
 import com.stockme.databinding.ActivityProductDetailBinding
@@ -23,6 +26,10 @@ import com.stockme.utils.showProgress
 import com.stockme.utils.showSnackBar
 import java.text.NumberFormat
 import java.util.*
+import pub.devrel.easypermissions.EasyPermissions
+
+
+
 
 class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
@@ -31,6 +38,8 @@ class ProductDetailActivity : AppCompatActivity() {
     private var photoURL: String? = null
     private var product: Product? = null
     private var price: String? = null
+
+    private val RC_CAMERA_PERM = 123
 
     private val addTextChangedListener = object: TextWatcher {
         override fun afterTextChanged(p0: Editable?) {}
@@ -73,12 +82,28 @@ class ProductDetailActivity : AppCompatActivity() {
         setupViews()
         setupObserver()
 
+        if (intent.extras == null) {
+            setTitle(R.string.product_detail_title_new_product)
+        }
 
         intent.extras?.getString(PRODUCT_ID)?.let {
             productId = it
             showProgress()
             viewModel.fetchProduct(it)
+            if (productId == null) {
+                setTitle(R.string.product_detail_title_new_product)
+            }
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
     private fun setupViews() {
@@ -87,7 +112,15 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.productImageView.setOnClickListener {
-            openCamera()
+            if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+                openCamera()
+            } else {
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.rationale_camera),
+                    RC_CAMERA_PERM,
+                    Manifest.permission.CAMERA)
+            }
         }
 
         binding.productSaveButton.setOnClickListener {
@@ -150,7 +183,28 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun scanBarCode() {
-        //TODO: Abrir framework
+        IntentIntegrator(this).initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result == null) {
+            super.onActivityResult(requestCode, resultCode, data)
+            return
+        }
+        if (result.contents == null) {
+            Snackbar.make(binding.root, "Cancelado", Snackbar.LENGTH_LONG).show()
+            return
+        }
+        val products: List<Product> = listOf()
+        val existsCode = products.any { it.code == result.contents }
+        if (existsCode) {
+            Snackbar.make(binding.root, "Ya existe un producto con código #" + result.contents, Snackbar.LENGTH_LONG).show()
+            return
+        }
+        binding.productBarcode.text = result.contents
+        binding.productBarcode.visibility = VISIBLE
+        binding.icBarcode.visibility = VISIBLE
     }
 
     private fun openCamera() {

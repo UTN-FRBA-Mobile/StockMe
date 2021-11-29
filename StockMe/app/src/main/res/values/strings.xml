@@ -20,6 +20,7 @@
     <string name="login_forgot_password_dialog_negative_cta">Cancelar</string>
     <string name="login_invalid_parameters">Por favor, revisá los datos ingresados</string>
     <string name="login_invalid_email">Por favor, revisá el formato de email ingresado</string>
+    <string name="login_invalid_user_password">Usuario o contraseña incorrectos</string>
     <string name="login_error">Ocurrió un problema. Intente nuevamente</string>
     <string name="login_password_reset_successful">Su contraseña ha sido reseteada exitosamente</string>
 
@@ -39,6 +40,7 @@
     <!--    Product Detail-->
 
     <string name="product_detail_title">Detalle del Producto</string>
+    <string name="product_detail_title_new_product">Nuevo Producto</string>
     <string name="product_detail_scan">Escanear</string>
     <string name="product_detail_save">Guardar</string>
     <string name="product_detail_description_hint">Descripción</string>
@@ -53,6 +55,7 @@
     <string name="product_detail_product_created_title">El producto ha sido creado satisfactoriamente</string>
     <string name="product_detail_product_modified_title">El producto ha sido modificado satisfactoriamente</string>
     <string name="product_detail_product_upload_photo_title">La foto ha sido creada satisfactoriamente</string>
+    <string name="product_search_not_found">No hay productos que coincidan con tu búsqueda</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -61,7 +64,42 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <string name="menu_home">Productos</string>
-    <string name="menu_sales">Ventas</string>
-    <string name="menu_stock">Órdenes de compra</string>
+    <string name="menu_sales">Nueva venta</string>
+    <string name="menu_drawer_sales">Ventas</string>
+    <string name="menu_drawer_stock">Órdenes de compra</string>
+    <string name="menu_stock">Nueva orden de compra</string>
+    <string name="menu_logout">Cerrar sesión</string>
+
+    <string name="rationale_camera">Se requiere el uso de la cámara para tomar fotografías.</string>
+
+    <string name="dialog_logout_text">¿Confirma que desea cerrar sesión?</string>
+    <string name="dialog_logout_yes">SI</string>
+    <string name="dialog_logout_no">Cancelar</string>
+
+    <string name="dialog_cart_add_text">¿Cuántas unidades?</string>
+    <string name="dialog_cart_yes">CONFIRMAR</string>
+    <string name="dialog_cart_no">CANCELAR</string>
+
+    <string name="dialog_cart_no_stock_text">No hay unidades de este producto</string>
+
+    <string name="dialog_cart_max_stock_text">El producto está en el stock máximo</string>
+
+    <string name="dialog_cart_empty_text">El carrito está vacío</string>
+    <string name="dialog_cart_empty_yes">OK</string>
+    <string name="activity_cart">Último paso</string>
+    <string name="dialog_cart_confirm_text">¿Confirma la venta?</string>
+    <string name="dialog_cart_confirm_desc">Los productos serán descontados del stock disponible.</string>
+
+    <string name="dialog_cart_stock_confirm_text">¿Confirma la compra?</string>
+    <string name="dialog_cart_stock_confirm_desc">Los productos serán agregados al stock disponible.</string>
+
+    <string name="dialog_cart_confirm_sale_text">Venta confirmada!</string>
+    <string name="dialog_cart_confirm_stock_text">Compra confirmada!</string>
+
+    <string name="dialog_sales_max_stock">La cantidad deseada supera el stock disponible</string>
+    <string name="dialog_stock_max_stock">La cantidad deseada supera el stock máximo del producto</string>
+    <string name="activity_login_title">Iniciar sesión</string>
+    <string name="activity_register_title">Registro</string>
+
 
 </resources>
