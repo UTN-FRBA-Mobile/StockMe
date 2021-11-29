@@ -65,6 +65,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
 
     kapt "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
