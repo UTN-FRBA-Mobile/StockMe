@@ -5,19 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginActivity">
-
-    <TextView
-        android:id="@+id/login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/login_sign_in"
-        android:textSize="30sp"
-        android:textColor="@color/black"/>
+    android:paddingTop="80dp"
+    tools:context=".login.LoginActivity">
 
     <TextView
         android:id="@+id/login_email_title"
@@ -26,7 +15,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_title"
         android:text="@string/login_email"
         android:textSize="16sp"
         android:textColor="@color/black"
@@ -40,7 +28,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintLeft_toLeftOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/login_title"
+        android:nextFocusForward="@id/login_email_edit_text"
         app:layout_constraintRight_toRightOf="parent"
         android:hint="@string/login_email"
         android:textSize="16sp"
@@ -76,38 +64,41 @@
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/no_account_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password_title"
-        android:text="@string/login_no_account"
-        android:textSize="16sp"
-        android:textColor="@color/black" />
-
-    <TextView
         android:id="@+id/forgot_password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password_edit_text"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="32dp"
         android:text="@string/login_forgot_password"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textColor="@color/black" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/no_account_text"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="48dp"
+        android:text="@string/login_sign_in"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/login_sign_in" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_password_title" />
+
+    <TextView
+        android:id="@+id/no_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/login_no_account"
+        android:textColor="@color/black"
+        android:textStyle="italic|bold"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
