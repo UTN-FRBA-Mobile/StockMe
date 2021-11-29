@@ -19,6 +19,8 @@ class BuyActivity : AppCompatActivity() {
 
         binding.searchView2.setOnClickListener {  }
 
+        binding.floatingCart.setOnClickListener {  }
+
         binding.itemList.layoutManager = LinearLayoutManager(this)
         binding.itemList.adapter = adapter
 
