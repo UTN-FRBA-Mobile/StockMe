@@ -88,7 +88,15 @@ class SalesFragment : Fragment() {
                 val quantity = it.getInputField().text.toString().toInt()
 
                 val prodInCart = product.copy(currentStock = quantity)
-                cart.add(prodInCart)
+
+                val existingInCart = cart.find { it.id == prodInCart.id }
+
+                if (existingInCart == null) {
+                    cart.add(prodInCart)
+                } else {
+                    cart.remove(existingInCart)
+                    cart.add(existingInCart.copy(currentStock = existingInCart.currentStock + quantity))
+                }
             }
             negativeButton(R.string.dialog_cart_no)
         }
