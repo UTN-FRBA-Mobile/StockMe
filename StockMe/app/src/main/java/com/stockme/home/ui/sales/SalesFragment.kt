@@ -22,6 +22,8 @@ import com.stockme.product.RecyclerItemClickListener
 
 class SalesFragment : Fragment() {
 
+    private val REQUEST_CART_CONFIRM: Int = 42
+
     private lateinit var viewModel: SalesViewModel
     private var _binding: FragmentSalesBinding? = null
 
@@ -32,6 +34,9 @@ class SalesFragment : Fragment() {
     private val products = ArrayList<Product>()
     private val cart = ArrayList<Product>()
 
+    companion object {
+        val CART_TRANSACTION_COMPLETE: Int = 43
+    }
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -134,7 +139,8 @@ class SalesFragment : Fragment() {
                 val intent = Intent(requireContext(), CartActivity::class.java).apply {
                     putExtra("cart", cart)
                 }
-                startActivity(intent)
+
+                startActivityForResult(intent, REQUEST_CART_CONFIRM)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -146,6 +152,12 @@ class SalesFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (resultCode == CART_TRANSACTION_COMPLETE) {
+            cart.clear()
+            return
+        }
+
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result == null) {
             super.onActivityResult(requestCode, resultCode, data)

@@ -67,6 +67,8 @@ class CartActivity : AppCompatActivity() {
                     }
                     batchUpdate.commit().addOnCompleteListener {
                         Snackbar.make(binding.root, R.string.dialog_cart_confirm_sale_text, Snackbar.LENGTH_LONG).show()
+
+                        setResult(SalesFragment.CART_TRANSACTION_COMPLETE)
                         finish()
                     }
                 }
