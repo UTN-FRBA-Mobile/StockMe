@@ -139,6 +139,7 @@ class SalesFragment : Fragment() {
                 }
                 val intent = Intent(requireContext(), CartActivity::class.java).apply {
                     putExtra("cart", cart)
+                    putExtra("isSales", true)
                 }
 
                 startActivityForResult(intent, REQUEST_CART_CONFIRM)

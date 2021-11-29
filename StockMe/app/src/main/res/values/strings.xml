@@ -88,6 +88,10 @@
     <string name="dialog_cart_confirm_text">¿Confirma la venta?</string>
     <string name="dialog_cart_confirm_desc">Los productos serán descontados del stock disponible.</string>
 
+    <string name="dialog_cart_stock_confirm_text">¿Confirma la compra?</string>
+    <string name="dialog_cart_stock_confirm_desc">Los productos serán agregados al stock disponible.</string>
+
     <string name="dialog_cart_confirm_sale_text">Venta confirmada!</string>
+    <string name="dialog_cart_confirm_stock_text">Compra confirmada!</string>
 
 </resources>

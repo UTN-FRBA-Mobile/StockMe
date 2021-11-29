@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.*
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,11 +16,9 @@ import com.afollestad.materialdialogs.input.input
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.stockme.R
-import com.stockme.databinding.FragmentSalesBinding
 import com.stockme.databinding.FragmentStockBinding
 import com.stockme.home.ui.CartActivity
 import com.stockme.home.ui.sales.SalesProductAdapter
-import com.stockme.home.ui.sales.SalesViewModel
 import com.stockme.model.Product
 import com.stockme.product.RecyclerItemClickListener
 
@@ -144,6 +140,7 @@ class StockFragment : Fragment() {
                 }
                 val intent = Intent(requireContext(), CartActivity::class.java).apply {
                     putExtra("cart", cart)
+                    putExtra("isSales", false)
                 }
 
                 startActivityForResult(intent, REQUEST_CART_CONFIRM)
