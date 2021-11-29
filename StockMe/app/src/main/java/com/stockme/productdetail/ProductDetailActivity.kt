@@ -9,7 +9,6 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
