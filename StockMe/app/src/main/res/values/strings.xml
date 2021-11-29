@@ -94,4 +94,8 @@
     <string name="dialog_cart_confirm_sale_text">Venta confirmada!</string>
     <string name="dialog_cart_confirm_stock_text">Compra confirmada!</string>
 
+    <string name="dialog_sales_max_stock">La cantidad deseada supera el stock disponible</string>
+    <string name="dialog_stock_max_stock">La cantidad deseada supera el stock máximo del producto</string>
+
+
 </resources>
