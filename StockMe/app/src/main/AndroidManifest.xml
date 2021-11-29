@@ -63,7 +63,7 @@
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
         <activity
-            android:name=".home.ui.sales.CartActivity"
+            android:name=".home.ui.CartActivity"
             android:label="@string/activity_cart"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

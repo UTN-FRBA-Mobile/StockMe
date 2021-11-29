@@ -63,7 +63,9 @@
 
     <string name="menu_home">Productos</string>
     <string name="menu_sales">Nueva venta</string>
-    <string name="menu_stock">Órdenes de compra</string>
+    <string name="menu_drawer_sales">Ventas</string>
+    <string name="menu_drawer_stock">Órdenes de compra</string>
+    <string name="menu_stock">Nueva orden de compra</string>
     <string name="menu_logout">Cerrar sesión</string>
 
     <string name="rationale_camera">Se requiere el uso de la cámara para tomar fotografías.</string>
@@ -77,7 +79,8 @@
     <string name="dialog_cart_no">CANCELAR</string>
 
     <string name="dialog_cart_no_stock_text">No hay unidades de este producto</string>
-    <string name="dialog_cart_no_stock_yes">OK</string>
+
+    <string name="dialog_cart_max_stock_text">El producto está en el stock máximo</string>
 
     <string name="dialog_cart_empty_text">El carrito está vacío</string>
     <string name="dialog_cart_empty_yes">OK</string>
@@ -85,6 +88,10 @@
     <string name="dialog_cart_confirm_text">¿Confirma la venta?</string>
     <string name="dialog_cart_confirm_desc">Los productos serán descontados del stock disponible.</string>
 
+    <string name="dialog_cart_stock_confirm_text">¿Confirma la compra?</string>
+    <string name="dialog_cart_stock_confirm_desc">Los productos serán agregados al stock disponible.</string>
+
     <string name="dialog_cart_confirm_sale_text">Venta confirmada!</string>
+    <string name="dialog_cart_confirm_stock_text">Compra confirmada!</string>
 
 </resources>

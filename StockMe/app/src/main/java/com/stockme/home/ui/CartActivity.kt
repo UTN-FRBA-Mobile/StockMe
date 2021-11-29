@@ -1,4 +1,4 @@
-package com.stockme.home.ui.sales
+package com.stockme.home.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -14,6 +14,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.stockme.R
 import com.stockme.databinding.ActivityCartBinding
+import com.stockme.home.ui.sales.SalesFragment
+import com.stockme.home.ui.sales.SalesProductAdapter
 import com.stockme.model.Product
 
 
@@ -24,6 +26,7 @@ class CartActivity : AppCompatActivity() {
     private val binding get() = _binding!!
 
     private lateinit var cart : List<Product>
+    private var isSales: Boolean = true
     private lateinit var cartAdapter: SalesProductAdapter
 
     private val firestoreDB = Firebase.firestore
@@ -37,6 +40,7 @@ class CartActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         cart = intent.extras?.get("cart") as ArrayList<Product>
+        isSales = intent.extras?.get("isSales") as Boolean
 
         cartAdapter = SalesProductAdapter(cart)
         binding.productList.apply {
@@ -53,20 +57,31 @@ class CartActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var titleResId = R.string.dialog_cart_confirm_text
+        var messageResId = R.string.dialog_cart_confirm_desc
+        var confirmMessageResId = R.string.dialog_cart_confirm_sale_text
+        var multiplier = -1
+
+        if (!isSales) {
+            titleResId = R.string.dialog_cart_stock_confirm_text
+            messageResId = R.string.dialog_cart_stock_confirm_desc
+            confirmMessageResId = R.string.dialog_cart_confirm_stock_text
+            multiplier = 1
+        }
         if (item.itemId == R.id.action_confirm) {
             MaterialDialog(this).show {
-                title(R.string.dialog_cart_confirm_text)
-                message(R.string.dialog_cart_confirm_desc)
+                title(titleResId)
+                message(messageResId)
                 positiveButton(R.string.dialog_cart_yes) {
                     val batchUpdate = firestoreDB.batch()
                     for (product in cart) {
-                        val decrementQuantity: Long = (-1 * product.currentStock).toLong()
+                        val decrementQuantity: Long = (multiplier * product.currentStock).toLong()
                         val prodByIdRef = firestoreDB.collection("products")
                                 .document(product.id!!)
                         batchUpdate.update(prodByIdRef, "currentStock", FieldValue.increment(decrementQuantity))
                     }
                     batchUpdate.commit().addOnCompleteListener {
-                        Snackbar.make(binding.root, R.string.dialog_cart_confirm_sale_text, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, confirmMessageResId, Snackbar.LENGTH_LONG).show()
 
                         setResult(SalesFragment.CART_TRANSACTION_COMPLETE)
                         finish()
