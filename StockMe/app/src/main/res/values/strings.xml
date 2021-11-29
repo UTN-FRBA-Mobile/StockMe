@@ -97,6 +97,8 @@
 
     <string name="dialog_sales_max_stock">La cantidad deseada supera el stock disponible</string>
     <string name="dialog_stock_max_stock">La cantidad deseada supera el stock máximo del producto</string>
+    <string name="activity_login_title">Iniciar sesión</string>
+    <string name="activity_register_title">Registro</string>
 
 
 </resources>

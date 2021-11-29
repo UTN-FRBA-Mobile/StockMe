@@ -45,10 +45,12 @@
             android:name=".register.RegisterActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:label="@string/activity_register_title"
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.LoginActivity"
             android:exported="true"
+            android:label="@string/activity_login_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
