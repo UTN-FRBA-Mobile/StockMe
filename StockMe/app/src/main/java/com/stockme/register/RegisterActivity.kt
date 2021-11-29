@@ -3,7 +3,9 @@ package com.stockme.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.stockme.R
@@ -66,7 +68,20 @@ class RegisterActivity : AppCompatActivity() {
                 binding.registerPasswordEditText.text.toString()
             )
         } else {
-            showSnackBar(binding.root, R.string.register_invalid_parameters)
+            if (!isValidEmail(binding.registerEmailEditText.text)) {
+                showSnackBar(binding.root, R.string.login_invalid_email)
+
+            }  else {
+                showSnackBar(binding.root, R.string.login_invalid_parameters)
+            }
+        }
+    }
+
+    private fun isValidEmail(target: CharSequence?): Boolean {
+        return if (TextUtils.isEmpty(target)) {
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(target).matches()
         }
     }
 
