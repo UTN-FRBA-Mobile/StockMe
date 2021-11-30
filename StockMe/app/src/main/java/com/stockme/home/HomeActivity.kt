@@ -1,6 +1,7 @@
 package com.stockme.home
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -10,8 +11,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.stockme.R
 import com.stockme.databinding.ActivityHomeBinding
 
@@ -49,6 +52,12 @@ class HomeActivity : AppCompatActivity() {
 
         userName.text = currentUser.displayName
         userEmail.text = currentUser.email
+
+        Firebase.messaging.subscribeToTopic("stock")
+                .addOnCompleteListener { task ->
+                    Log.d("HomeActivity", "Subscribed")
+
+                }
     }
 
     override fun onSupportNavigateUp(): Boolean {
